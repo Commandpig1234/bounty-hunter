@@ -171,6 +171,32 @@ function loadmap(phase){
 	
 	}
 
+	else if(phase=='na_street'){
+		$('.hero').css('display','block');
+		scene.style.backgroundImage = "url(./img/map/na_street.jpg), url(./img/black_background.jpg)";
+		scene.style.backgroundSize = "auto, cover"; 
+		scene.style.backgroundRepeat = "no-repeat, repeat"; 
+		scene.style.backgroundPosition = "center, center";
+
+		if(true){
+			$('.hero').css('left','20px');
+			$('.hero').css('top','540px');
+			$('.hero').css('background-position-y','0');
+		}
+
+		wallx = [[6,607,941],[873,402,74],[726,502,147],[548,404,178],[406,508,142],[277,412,129],[166,496,111],[6,411,160]];
+		wally = [[947,402,205],[873,402,100],[726,404,98],[548,404,104],[406,412,96],[277,412,84],[166,411,85],[6,411,196]];
+
+		npc=[[100,460,40,'old_knight_na_street']];
+		object=[];
+		door=[];
+
+		$('#npc1').css('display','block');
+		$('#npc1').css('background-image','url("./img/character/old_knight.png")');
+		$('#npc1').css('left','100px');
+		$('#npc1').css('top','460px'); 
+	}
+
 }
 //这段代码的主要功能是处理地图转换的过渡效果，包括背景图切换、人物移动、NPC出现、对话显示等。
 // 具体步骤如下：

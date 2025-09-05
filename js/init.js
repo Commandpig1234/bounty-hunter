@@ -56,6 +56,9 @@ var old_knight=0;
 // gem_room
 var old_knight_gem=0;
 
+//na_street
+var old_knight_na_street=0;
+
 // 物品相关
 var paper_at_home=0;
 var gem=0;

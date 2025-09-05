@@ -338,7 +338,7 @@ function dialog(man){
 	}
 	else if (man=='old_knight_gem'){
 		text.style.display='block'; // 在switch case前面开启显示，播完之后在interact自动关，不用在这里关
-		man_now='old_knight_gem';
+		//man_now='old_knight_gem';
 		switch(old_knight_gem){
 			case 0:{
 				picture.innerHTML='<img src="./img/avatar/old_knight.png">';
@@ -360,6 +360,98 @@ function dialog(man){
 				picture.innerHTML='<img src="./img/avatar/old_knight.png">';
 				title.innerHTML='韦斯';
 				texture.innerHTML='哦杰恩，需要思考的事我没法帮你，但我会替你守好门的';
+				person='end';
+				break;
+			}
+		}
+	}
+
+	else if (man=='old_knight_na_street'){
+		text.style.display='block';
+		switch(old_knight_na_street){
+			case 0:{
+				picture.innerHTML='<img src="./img/avatar/old_knight.png">';
+				title.innerHTML='韦斯';
+				texture.innerHTML='哦杰恩，这个地方看上去真的美好极了！我要在这个地方定居了。';
+				old_knight_na_street++;
+				break;
+			}
+			case 1:{
+				picture.innerHTML='<img src="./img/avatar/old_knight.png">';
+				title.innerHTML='韦斯';
+				texture.innerHTML='你呢杰恩？还要去做你的委托吗？你都有那么多酬金了，为什么不和我留在这里享受生活的乐趣？';
+				old_knight_na_street++;
+				break;
+			}
+			case 2:{ 
+				// 开始分岔  
+				// 这里应该不用做处理，即使再E，也会来到case4，只是重复设置这些元素而已，不会跳出（因为没++）
+				picture.innerHTML='';
+				title.innerHTML='';
+				texture.innerHTML='要放弃委托，和韦斯一起留在纳安城吗？（你的选择会影响到你的未来）';
+				choice_zone.style.display='block';
+				choice1.innerHTML='同意';
+				choice2.innerHTML='拒绝';
+				// 这里不应该++，否则不点按钮，e一下就过去了
+				break;
+			}
+			case 3:{
+				picture.innerHTML='<img src="./img/avatar/old_knight.png">';
+				title.innerHTML='韦斯';
+				texture.innerHTML='很聪明的决定，走吧，我看到了一家看起来很不错的酒馆，为我们的新生活喝一杯';
+				old_knight_na_street++;
+				break;
+			}
+			case 4:{
+				picture.innerHTML='';
+				title.innerHTML='';
+				texture.innerHTML='在纳安城的生活美好而虚无，这里的人们过着固定规律节奏的生活，时间长了，你与韦斯逐渐被这里同化，渐渐遗忘了你们的过去.......';
+				pauseSong();
+				addachievement(4);
+				old_knight_na_street++;
+				break;
+			}
+			case 5:{
+				picture.innerHTML='';
+				title.innerHTML='';
+				texture.innerHTML='';
+				end(3);
+				break;
+			}
+			case 10:{
+				picture.innerHTML='<img src="./img/avatar/old_knight.png">';
+				title.innerHTML='韦斯';
+				texture.innerHTML='好吧朋友，你可真是一个守信的赏金猎人';
+				old_knight_na_street++;
+				break;
+			}
+			case 11:{
+				picture.innerHTML='<img src="./img/avatar/old_knight.png">';
+				title.innerHTML='韦斯';
+				texture.innerHTML='那我把我的骑士勋章给你吧，让它代替我与你同行';
+				old_knight_na_street++;
+				break;
+			}
+			case 12:{
+				picture.innerHTML='';
+				title.innerHTML='';
+				texture.innerHTML='（获得道具：骑士勋章）';
+				old_knight_na_street++;
+				break;
+			}
+			case 13:{
+				picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩（收下骑士勋章）';
+				texture.innerHTML='我会的，等我完成这份委托我就回来找你';
+				old_knight_na_street++;
+				addachievement(5);
+				break;
+			}
+			default:{
+				picture.innerHTML='<img src="./img/avatar/old_knight.png">';
+				title.innerHTML='韦斯';
+				texture.innerHTML='To be Continue';
+				old_knight_na_street++;
 				person='end';
 				break;
 			}
@@ -394,6 +486,25 @@ function choice(num){
 				// 这里也不应调用dialog，而是让玩家E一下，自然就进入新对话了
 				// 因为old_knight变化了，person没变，所以会回到骑士的case5
 				old_knight=5; 
+				break;
+			}
+		}
+	}
+
+	else if(man_now=='old_knight_na_street'){
+		switch(num){
+			case 0:{
+				picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩';
+				texture.innerHTML='你说的很有道理韦斯，我已经有那么多报酬了，何必纠结这份委托';
+				old_knight_na_street++;//3
+				break;
+			}
+			case 1:{
+				picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩';
+				texture.innerHTML='哦韦斯，谢谢你的好意，不过我已经接了这份委托，还是打算将它做完';
+				old_knight_na_street = 10;
 				break;
 			}
 		}
