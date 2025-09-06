@@ -61,5 +61,12 @@ function reload(archive_num){
     loadmap(now_phase);
     hero.style.left = hero_x;
     hero.style.top = hero_y;
+    var tim=setInterval(function(){
+	    if(now_phase=='bar'&&dis(hero.offsetLeft,hero.offsetTop,404,616)<=200&&old_knight>=14&&old_knight<=20){
+            person='old_knight';
+            dialog(person);
+            clearInterval(tim);
+        }
+    },50);
 }
 
