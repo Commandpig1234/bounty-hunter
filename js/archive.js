@@ -38,7 +38,7 @@ function save(archive_num,time_num){
 }
 //加载存档
 function reload(archive_num){
-    
+    hero = document.querySelector('.hero');
     obj = localStorage.getItem('Hound_' + usr + '_' + archive_num + 'obj');
     person = localStorage.getItem('Hound_' + usr + '_' + archive_num + 'person');
     trans = localStorage.getItem('Hound_' + usr + '_' + archive_num + 'trans');
@@ -56,10 +56,9 @@ function reload(archive_num){
     paper_at_home = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'paper_at_home'));
     gem = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'gem'));
 
+    hero_x = localStorage.getItem('Hound_' + usr + '_' + archive_num + 'hero_x');
+    hero_y = localStorage.getItem('Hound_' + usr + '_' + archive_num + 'hero_y');
     loadmap(now_phase);
-
-    hero_x = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'hero_x'));
-    hero_y = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'hero_y'));
     hero.style.left = hero_x;
     hero.style.top = hero_y;
 }
