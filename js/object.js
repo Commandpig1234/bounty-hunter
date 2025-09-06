@@ -66,7 +66,7 @@ function interact(object){
             case 3:{
 				text.style.display='none'; // 对话结束后关闭对话框
 				obj = 'none';
-				transform('na_street');
+				cg(1);
 				break;
 			}
         }
