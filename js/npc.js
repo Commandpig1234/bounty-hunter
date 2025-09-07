@@ -483,10 +483,391 @@ function dialog(man){
 				break;
 			}
 			default:{
-				picture.innerHTML='<img src="./img/avatar/old_knight.png">';
-				title.innerHTML='韦斯';
-				texture.innerHTML='To be Continue';
 				old_knight_na_street++;
+				person='none';
+				text.style.display='none';
+				transform('na_street_01')
+				break;
+			}
+		}
+	}
+	else if (man=='resident_man'){
+		text.style.display='block';
+		switch(resident_man){
+			case 0:{
+				picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩（把信件和地图展示给男居民）';
+				texture.innerHTML='打扰一下，你见过这个人吗？';
+				resident_man++;
+				break;
+			}
+			case 1:{
+				picture.innerHTML='<img src="./img/avatar/resident_man.png">';
+				title.innerHTML='男居民';
+				texture.innerHTML='没见过，他是纳安城的人吗';
+				resident_man++;
+				person='end';
+				break;
+			}
+			case 2:{
+				picture.innerHTML='<img src="./img/avatar/resident_man.png">';
+				title.innerHTML='男居民';
+				texture.innerHTML='我从没听说过这个人，或许你应该去其他地方找';
+				resident_man++;
+				person='end';
+				break;
+			}
+			default:{
+				picture.innerHTML='<img src="./img/avatar/resident_man.png">';
+				title.innerHTML='男居民';
+				texture.innerHTML='你问我去哪儿找？我也不知道，我只知道这片街区';
+				if(resident_woman === 0 || resident_man === 3){
+					resident_man++;
+					person='end';
+					break;
+				}
+				else{
+					text.style.display='none'; // 对话结束后关闭对话框
+					person = 'none';
+					cg(2);
+				}
+			}
+			
+		}
+	}
+	else if (man=='resident_woman'){
+		text.style.display='block';
+		switch(resident_woman){
+			case 0:{
+				picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩（把信件和地图展示给女居民）';
+				texture.innerHTML='请问你见过这个人吗';
+				resident_woman++;
+				break;
+			}
+			case 1:{
+				picture.innerHTML='<img src="./img/avatar/resident_woman.png">';
+				title.innerHTML='女居民';
+				texture.innerHTML='或许见过吧，不过我不记得了';
+				resident_woman++;
+				person='end';
+				break;
+			}
+			default:{
+				picture.innerHTML='<img src="./img/avatar/resident_woman.png">';
+				title.innerHTML='女居民';
+				texture.innerHTML='到底见过没有？我不知道，我并不记得太多的事情';
+				if(resident_man === 0 || resident_woman === 2){
+					resident_woman++;
+					person='end';
+					break;
+				}
+				else{
+					text.style.display='none'; // 对话结束后关闭对话框
+					person = 'none';
+					cg(2);
+				}
+				
+			}
+			
+		}
+	}
+	else if (man=='newspaper_boy'){
+		text.style.display='block';
+		switch(newspaper_boy){
+			case 0:{
+				picture.innerHTML='<img src="./img/avatar/newspaper_boy.png">';
+				title.innerHTML='报童';
+				texture.innerHTML='买一份报纸吗先生';
+				newspaper_boy++;
+				break;
+			}
+			case 1:{
+				picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩（看到报纸）';
+				texture.innerHTML='1773年......哦，我居然回到了十年前的纳安城！真是神奇！';
+				newspaper_boy++;
+				break;
+			}
+			case 2:{
+				picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩';
+				texture.innerHTML='难道我要找的人是来自过去的人？那可真是有趣';
+				newspaper_boy++;
+				person='end';
+				break;
+			}
+			default:{
+				picture.innerHTML='<img src="./img/avatar/newspaper_boy.png">';
+				title.innerHTML='报童';
+				texture.innerHTML='先生，报纸有什么问题吗？';
+				person='end';
+				break;
+			}
+		}
+	}
+	else if (man=='vina'){
+		text.style.display='block';
+		switch(vina){
+			case 0:{
+				picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩';
+				texture.innerHTML='你好美丽的小姐，请问我是否在哪儿见过你？';
+				vina++;
+				break;
+			}
+			case 1:{
+				picture.innerHTML='<img src="./img/avatar/vina.png">';
+				title.innerHTML='维娜';
+				texture.innerHTML='哦这位先生，我觉得我可能见过你，你很眼熟，不过抱歉我不记得你是谁了。';
+				vina++;
+				break;
+			}
+			case 2:{
+				picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩';
+				texture.innerHTML='我叫杰恩，这位美丽的小姐。';
+				vina++;
+				break;
+			}
+			case 3:{
+				picture.innerHTML='<img src="./img/avatar/vina.png">';
+				title.innerHTML='维娜';
+				texture.innerHTML='我叫维娜，杰恩先生，你这是要去做什么吗？';
+				vina++;
+				break;
+			}case 4:{
+				picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩（将信件和地图展示给维娜）';
+				texture.innerHTML='我接了一份委托，要找一个人';
+				vina++;
+				break;
+			}case 5:{
+				picture.innerHTML='<img src="./img/avatar/vina.png">';
+				title.innerHTML='维娜';
+				texture.innerHTML='人在纳安城？很不幸的是我不认识这个人，但我想我可以和你一起找';
+				vina++;
+				break;
+			}case 6:{
+				picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩';
+				texture.innerHTML='哦那真是再好不过了。';
+				vina++;
+				break;
+			}
+			case 7:{
+				text.style.display='none';
+				person='none';
+				transform('na_street_03');
+			}
+		}
+	}
+	else if (man=='our_three'){
+		text.style.display='block'; 
+		man_now='our_three';
+		switch(our_three){
+			case 0:{
+				picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩';
+				texture.innerHTML='（展示信件和地图）你好,老婆婆，您见过这个人吗？';
+				our_three++;
+				break;
+			}
+			case 1:{
+				picture.innerHTML='<img src="./img/avatar/old_woman.png">';
+				title.innerHTML='老人家';
+				texture.innerHTML='年纪大了，记不清了';
+				our_three++;
+				break;
+			}
+			case 2:{
+				picture.innerHTML='<img src="./img/avatar/vina.png">';
+				title.innerHTML='维娜';
+				texture.innerHTML='哦婆婆，这对我们来说很重要，您可以想一想吗？';
+				our_three++;
+				break;
+			}
+			case 3:{
+				picture.innerHTML='<img src="./img/avatar/young_man.png">';
+				title.innerHTML='年轻人';
+				texture.innerHTML='嘿奶奶，这个人很像实验室那位博士！我想你们可以去实验室找找。';
+				our_three++;
+				break;
+			}
+			case 4:{
+				picture.innerHTML='<img src="./img/avatar/old_woman.png">';
+				title.innerHTML='老人家';
+				texture.innerHTML='坏孩子，实验室是一个会吃人的地方。';
+				our_three++;
+				break;
+			}
+			case 5:{
+				picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩';
+				texture.innerHTML='维娜，我想我们该去实验室看看';
+				our_three++;
+				break;
+			}
+			case 6:{
+				picture.innerHTML='<img src="./img/avatar/vina.png">';
+				title.innerHTML='维娜';
+				texture.innerHTML='我也赞同。';
+				our_three++;
+				person='end';
+				break;
+			}
+			case 7:{
+				picture.innerHTML='<img src="./img/avatar/old_woman.png">';
+				title.innerHTML='老婆婆';
+				texture.innerHTML='孩子们，去实验室可不是一个明智的选择。';
+				our_three++;
+				break;
+			}
+			case 8:{
+				picture.innerHTML='<img src="./img/avatar/vina.png">';
+				title.innerHTML='维娜';
+				texture.innerHTML='谢谢婆婆的提醒，不过我们确实有很重要的事要找他。';
+				our_three++;
+				break;
+			}
+			case 9:{
+				picture.innerHTML='<img src="./img/avatar/young_man.png">';
+				title.innerHTML='年轻人';
+				texture.innerHTML='但是我也不确定那个人是不是博士，我只是随口一提。';
+				our_three++;
+				break;
+			}
+			case 10:{
+				picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩';
+				texture.innerHTML='没关系，我们去看看就好了。';
+				our_three++;
+				person='end';
+				break;
+			}
+			case 11:{
+				picture.innerHTML='<img src="./img/avatar/old_woman.png">';
+				title.innerHTML='老婆婆';
+				texture.innerHTML='在到实验室之前，你们还有后悔的机会，现在的实验室可不是一个好地方。';
+				our_three++;
+				break;
+			}
+			case 12:{
+				picture.innerHTML='<img src="./img/avatar/young_man.png">';
+				title.innerHTML='年轻人';
+				texture.innerHTML='奶奶说的没错，你们真的要去实验室吗？';
+				our_three++;
+				break;
+			}
+			case 13:{
+				picture.innerHTML='<img src="./img/avatar/vina.png">';
+				title.innerHTML='维娜';
+				texture.innerHTML='没错，我们要去看看。';
+				our_three++;
+				break;
+			}
+			default:{ 
+				text.style.display='none';
+				person = 'none';
+				transform('lab');
+				break;
+			}
+		}
+	}
+	else if (man=='vina_log'){
+		text.style.display='block';
+		switch(vina_log){
+			case 0:{
+				picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩';
+				texture.innerHTML='嘿维娜，这有一本实验日志';
+				vina_log++;
+				break;
+			}
+			case 1:{
+				picture.innerHTML='<img src="./img/avatar/vina.png">';
+				title.innerHTML='维娜';
+				texture.innerHTML='哦杰恩，你看，这上面有我们的名字！';
+				vina_log++;
+				break;
+			}
+			case 2:{
+				picture.innerHTML='<img src="./img/avatar/vina.png">';
+				title.innerHTML='维娜';
+				texture.innerHTML='这是一项关于时光机的研究。';
+				vina_log++;
+				break;
+			}
+			case 3:{
+				picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩';
+				texture.innerHTML='快让我看看，我真的很好奇自己的过去！';
+				vina_log++;
+				break;
+			}case 4:{
+				picture.innerHTML='<img src="./img/avatar/vina.png">';
+				title.innerHTML='维娜';
+				texture.innerHTML='杰恩你看！我们以前都是实验室的研究员！';
+				vina_log++;
+				break;
+			}case 5:{
+				picture.innerHTML='<img src="./img/avatar/vina.png">';
+				title.innerHTML='维娜';
+				texture.innerHTML='但是我对这件事真的一点印象都没有';
+				vina_log++;
+				break;
+			}case 6:{
+				picture.innerHTML='<img src="./img/avatar/vina.png">';
+				title.innerHTML='维娜';
+				texture.innerHTML='而且在你来这里之前，我从没听说过实验室';
+				vina_log++;
+				break;
+			}
+			case 7:{
+				picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩';
+				texture.innerHTML='这真是一件奇怪的事';
+				vina_log++;
+				break;
+			}case 8:{
+				picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩';
+				texture.innerHTML='维娜小姐，你看这儿，时光机的实验成功了，但是我们失败了，他们来到了这个世界……';
+				vina_log++;
+				break;
+			}
+			case 9:{
+				picture.innerHTML='<img src="./img/avatar/vina.png">';
+				title.innerHTML='维娜';
+				texture.innerHTML='这是什么意思？';
+				vina_log++;
+				break;
+			}
+			case 10:{
+				picture.innerHTML='<img src="./img/avatar/vina.png">';
+				title.innerHTML='维娜';
+				texture.innerHTML='实验成功了，为什么又说我们失败了？';
+				vina_log++;
+				break;
+			}case 11:{
+				picture.innerHTML='<img src="./img/avatar/vina.png">';
+				title.innerHTML='维娜';
+				texture.innerHTML='他们又是谁？';
+				vina_log++;
+				break;
+			}
+			case 12:{
+				picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩';
+				texture.innerHTML='不知道，日志到这里就结束了，我想我们可以找找其他线索。';
+				vina_log++;
+				person='end';
+				break;
+			}
+			default:{
+				picture.innerHTML='<img src="./img/avatar/vina.png">';
+				title.innerHTML='维娜';
+				texture.innerHTML='杰恩你找到线索了吗？我这里什么都没有';
 				person='end';
 				break;
 			}

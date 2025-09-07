@@ -78,6 +78,12 @@ function skipCurrentCg(cgId) {
     if (cgId === 0) {
         transform('home');
     }
+	else if(cgId === 1){
+		transform('na_street');
+	}
+	else if(cgId === 2){
+		transform('na_street_02');
+	}
 }
 
 function cg(id){
@@ -199,9 +205,44 @@ function cg(id){
 		cgTimeouts.push(setTimeout("$('.caption').fadeOut(500)",21000)); // 8秒后文字用0.5秒淡出
 		
 		cgTimeouts.push(setTimeout(function(){
-			transform('na_street');
-            $('#skipCgButton').hide(); // CG结束后隐藏按钮
+            transform('na_street');
+			$('#skipCgButton').hide(); // CG结束后隐藏按钮
             clearCgTimeouts(); // 清除所有定时器
 		},19000));
-	} 
+	}
+	else if(id==2) {//前往高塔CG
+		// 第一阶段：初始化显示状态
+		loadSong('gate of steiner.mp3');
+		playSong();
+		$('.background_board').css('display','none'); // 背景板隐藏
+		$('.caption').css('display','none'); // 字幕隐藏
+		$('.curtain').css('display','block'); // 幕布显示
+
+		// setTimeout是异步的，不阻塞其他代码执行
+		// 如果想在在显示后4秒消失，应该在setTimeout写上开始时间+4000，而不是4000
+
+		cgTimeouts.push(setTimeout(function(){
+			$('.caption').html('你在纳安城打听了很久，但是这里的人都是这样一问三不知，委托似乎就这样卡在这里了，一筹莫展之际，你意外发现纳安城中心的高塔似乎有些奇特'); 
+			$('.caption').fadeIn(1000); // 文字用1秒时间淡入显示
+		},1000));
+		cgTimeouts.push(setTimeout("$('.caption').fadeOut(500)",9000)); // 8秒后文字用0.5秒淡出
+
+		cgTimeouts.push(setTimeout(function(){
+			$('.caption').html('出于某种直觉，你立刻去了高塔，在这里找到了能够使用宝石钥匙的门'); // 
+			$('.caption').fadeIn(1000); // 文字用1秒时间淡入显示
+		},11000));
+		cgTimeouts.push(setTimeout("$('.caption').fadeOut(500)",15000)); // 4秒后文字用0.5秒淡出
+
+		cgTimeouts.push(setTimeout(function(){
+			$('.caption').html('当宝石钥匙嵌入门上的孔洞时，门缓缓打开'); // 
+			$('.caption').fadeIn(1000); // 文字用1秒时间淡入显示
+		},17000));
+		cgTimeouts.push(setTimeout("$('.caption').fadeOut(500)",20000)); // 3秒后文字用0.5秒淡出
+		
+		cgTimeouts.push(setTimeout(function(){
+			transform('na_street_02');
+			$('#skipCgButton').hide(); // CG结束后隐藏按钮
+            clearCgTimeouts(); // 清除所有定时器
+		},23000));
+	}
 }

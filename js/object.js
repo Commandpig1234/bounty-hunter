@@ -66,9 +66,21 @@ function interact(object){
             case 3:{
 				text.style.display='none'; // 对话结束后关闭对话框
 				obj = 'none';
-				cg(1);
-				break;
+                cg(1);
+                break;
 			}
+        }
+    }
+    else if(object=='record'){
+        text.style.display='block';
+        switch(record){ 
+            default:{
+                picture.innerHTML='<img src="./img/avatar/jane.png">';
+                title.innerHTML='杰恩';
+				texture.innerHTML='这里有一个录像带';
+                obj='end';
+                break;
+            }
         }
     }
 }

@@ -59,6 +59,21 @@ var old_knight_gem=0;
 //na_street
 var old_knight_na_street=0;
 
+//na_street_01
+var resident_man=0;
+var resident_woman=0;
+
+//na_street_02
+var newspaper_boy=0;
+var vina=0;
+
+//na_street_03
+var our_three=0;
+
+//lab
+var vina_log=0;
+
 // 物品相关
 var paper_at_home=0;
 var gem=0;
+var record=0;
