@@ -27,6 +27,7 @@ function save(archive_num,time_num){
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'paper_at_home', paper_at_home);
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'gem', gem);
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'old_knight_na_street', old_knight_na_street);
+
     
 
 
@@ -39,7 +40,7 @@ function save(archive_num,time_num){
 }
 //加载存档
 function reload(archive_num){
-    
+    hero = document.querySelector('.hero');
     obj = localStorage.getItem('Hound_' + usr + '_' + archive_num + 'obj');
     person = localStorage.getItem('Hound_' + usr + '_' + archive_num + 'person');
     trans = localStorage.getItem('Hound_' + usr + '_' + archive_num + 'trans');
@@ -58,11 +59,18 @@ function reload(archive_num){
     gem = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'gem'));
     old_knight_na_street = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'old_knight_na_street'));
 
-    loadmap(now_phase);
 
-    hero_x = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'hero_x'));
-    hero_y = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'hero_y'));
+    hero_x = localStorage.getItem('Hound_' + usr + '_' + archive_num + 'hero_x');
+    hero_y = localStorage.getItem('Hound_' + usr + '_' + archive_num + 'hero_y');
+    loadmap(now_phase);
     hero.style.left = hero_x;
     hero.style.top = hero_y;
+    var tim=setInterval(function(){
+	    if(now_phase=='bar'&&dis(hero.offsetLeft,hero.offsetTop,404,616)<=200&&old_knight>=14&&old_knight<=20){
+            person='old_knight';
+            dialog(person);
+            clearInterval(tim);
+        }
+    },50);
 }
 

@@ -2,9 +2,7 @@ const musicContainer = document.getElementById('music-container');
 const playBtn = document.getElementById('play');
 const prevBtn = document.getElementById('prev');
 const nextBtn = document.getElementById('next');
-const autoPlayBtn = document.getElementsByClassName('auto-play-music')[0];
 const audio = document.getElementById('audio');
-console.log(autoPlayBtn);
 
 // Song titles
 const songs = ['home and bar.mp3','gate of steiner.mp3', 'summer pocket.mp3', 'sea you and me.mp3','game1.mp3', 'OP.mp3', 'game3.mp3', ]; //_3_ bgm

@@ -91,7 +91,8 @@ function loadmap(phase){
 		$('#npc3').css('display','none');
 
 		object = [];
-		door = [[190, 435, 40, 'home'], [715, 405, 40, 'bar']];
+		// door = [[190, 435, 40, 'home'], [715, 405, 40, 'bar']];
+		door = [[190, 435, 40, 'home'], [715, 405, 40, 'bar']]
 	}
 	else if(phase=='bar'){
 		$('.hero').css('display','block');

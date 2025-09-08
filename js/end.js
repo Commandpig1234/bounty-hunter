@@ -65,6 +65,7 @@ function end(id){
 
 
 
+
 	// 为音乐播放器发送消息
 	setTimeout(function(){
 		window.parent.postMessage('showMusicPlayer', '*')

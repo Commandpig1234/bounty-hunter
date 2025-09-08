@@ -906,7 +906,6 @@ function choice(num){
 			}
 		}
 	}
-
 	else if(man_now=='old_knight_na_street'){
 		switch(num){
 			case 0:{

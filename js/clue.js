@@ -1,5 +1,3 @@
-
-
 function addachievement(id){
 	if(id==0) $('#achieve').html('test');
 	else if(id==1){

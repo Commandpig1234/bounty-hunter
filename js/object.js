@@ -78,8 +78,7 @@ function interact(object){
                 picture.innerHTML='<img src="./img/avatar/jane.png">';
                 title.innerHTML='杰恩';
 				texture.innerHTML='这里有一个录像带';
-                obj='end';
-                break;
+
             }
         }
     }
