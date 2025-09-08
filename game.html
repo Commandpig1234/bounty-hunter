@@ -139,7 +139,7 @@
 			</div>
 		</div>
 		<!-- <div class="auto-play-music"></div> -->
-		<!-- <div id="coordHud" style="position:absolute; top:8px; left:8px; padding:4px 8px; background: rgba(0,0,0,0.6); color:#0f0; font: 12px/1 monospace; z-index: 99999; pointer-events:none;">X: -, Y: - | phase: -</div> -->
+		<div id="coordHud"></div>
 		<!-- 提供“继续游戏”、“保存游戏”和“退出游戏”三个选项。
 		“继续游戏”按钮隐藏当前菜单。
 		“保存游戏”按钮调用 click_save() 函数。
@@ -291,8 +291,30 @@
 			<div class="background_board"></div>
 			<div class="caption"></div>
 		</div>
+		<div class="video">
+			<video id="bgVideo" src="video/test2.mp4"></video>
+			<button id="skipVideoButton" style="position: absolute; top: 10px; right: 10px; z-index: 1000000; background-color: rgba(0,0,0,0.5); color: white; padding: 10px 20px; cursor: pointer; display: none;">跳过CG</button>
+		</div>
 		
 	</div>
+
+	<script>
+		function showVideo() {
+			document.querySelector('#bgVideo').style.display = 'block';
+			document.querySelector('#skipVideoButton').style.display = 'block';
+			document.getElementById('bgVideo').play();
+		}
+
+		function hideVideo() {
+			document.querySelector('.video').style.display = 'none';
+			document.querySelector('#skipVideoButton').style.display = 'none';
+			document.getElementById('bgVideo').pause();
+			document.getElementById('bgVideo').currentTime = 0;
+		}
+		document.getElementById('skipVideoButton').addEventListener('click', hideVideo);
+
+		document.getElementById('bgVideo').addEventListener('ended', hideVideo);
+	</script>
 
 	<script language="javascript" src="js/game_music.js"></script> 
 	<script language="javascript" src="js/archive.js"></script>
@@ -349,6 +371,7 @@
 		});
 	</script>
 	<!-- 游戏内的音乐播放器，与主页不同 -->
-</body>
+		<script src="./js/hud.js"></script>
+	</body>
 
 </html>

@@ -28,6 +28,24 @@
 	width:700px;
 	transform:translate(-50%,-50%);
 }
+.video video{
+	width:1000px;
+	height:800px;
+	position:absolute;
+	z-index:100000;
+	display:none;
+}
+.video button{
+	position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000000;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: none;
+}
 .option{
 	width:1000px;
 	height:800px;
@@ -91,6 +109,23 @@
 	font-size:20px;
 	text-align:center;
 	line-height:60px;
+}
+
+/* 与音乐播放器风格一致的任务提示HUD */
+#coordHud {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    padding: 8px 16px;
+    background-color: rgba(46, 38, 30, 0.8);
+    border: 1px solid rgba(184, 162, 122, 0.6);
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    color: rgba(212, 189, 143, 0.8);
+    font-family: 'Times New Roman', serif;
+    font-size: 14px;
+    z-index: 99999;
+    pointer-events: none;
 }
 
 @keyframes counter_achievement{
