@@ -41,12 +41,45 @@ function interact(object){
     else if(object=='gem'){
         text.style.display='block';
         switch(gem){ 
-            default:
+            case 0:{
+                picture.innerHTML='';
+				title.innerHTML='';
+				texture.innerHTML='（获得道具：宝石钥匙）';
+                addachievement(3);
+				gem++;
+				break;
+            }
+            case 1:{
+                picture.innerHTML='<img src="./img/avatar/old_knight.png">';
+                title.innerHTML='韦斯';
+				texture.innerHTML='身手不错啊杰恩，但现在我们得快点离开莱茵城了，不然被德莱伯爵发现就麻烦了';
+                gem++;
+                break; 
+            }
+            case 2:{
                 picture.innerHTML=''; 
                 title.innerHTML='';
 				texture.innerHTML='(拿到宝石后，你们从密室逃脱)';
-                obj='end';
+                gem++;
+                break;              
+            }
+            case 3:{
+				text.style.display='none'; // 对话结束后关闭对话框
+				obj = 'none';
+                cg(1);
                 break;
+			}
+        }
+    }
+    else if(object=='record'){
+        text.style.display='block';
+        switch(record){ 
+            default:{
+                picture.innerHTML='<img src="./img/avatar/jane.png">';
+                title.innerHTML='杰恩';
+				texture.innerHTML='这里有一个录像带';
+
+            }
         }
     }
 }
