@@ -91,7 +91,7 @@ function loadmap(phase){
 		$('#npc3').css('display','none');
 
 		object = [];
-		// door = [[190, 435, 40, 'home'], [715, 405, 40, 'bar'],[960,520,100,'gem_room']];
+		// door = [[190, 435, 40, 'home'], [715, 405, 40, 'bar']];
 		door = [[190, 435, 40, 'home'], [715, 405, 40, 'bar']]
 	}
 
