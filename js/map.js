@@ -94,7 +94,6 @@ function loadmap(phase){
 		// door = [[190, 435, 40, 'home'], [715, 405, 40, 'bar']];
 		door = [[190, 435, 40, 'home'], [715, 405, 40, 'bar']]
 	}
-
 	else if(phase=='bar'){
 		$('.hero').css('display','block');
 		scene.style.backgroundImage = "url(./img/map/bar.png), url(./img/black_background.jpg)";
@@ -170,6 +169,166 @@ function loadmap(phase){
 		$('#npc3').css('display','none');
 	
 	}
+
+	else if(phase=='na_street'){
+		$('.hero').css('display','block');
+		scene.style.backgroundImage = "url(./img/map/na_street.jpg), url(./img/black_background.jpg)";
+		scene.style.backgroundSize = "auto, cover"; 
+		scene.style.backgroundRepeat = "no-repeat, repeat"; 
+		scene.style.backgroundPosition = "center, center";
+
+		if(true){
+			$('.hero').css('left','20px');
+			$('.hero').css('top','540px');
+			$('.hero').css('background-position-y','0');
+		}
+
+		wallx = [[6,607,941],[873,402,74],[726,502,147],[548,404,178],[406,508,142],[277,412,129],[166,496,111],[6,411,160]];
+		wally = [[947,402,205],[873,402,100],[726,404,98],[548,404,104],[406,412,96],[277,412,84],[166,411,85],[6,411,196]];
+
+		npc=[[100,460,40,'old_knight_na_street']];
+		object=[];
+		door=[];
+
+		$('#npc1').css('display','block');
+		$('#npc1').css('background-image','url("./img/character/old_knight.png")');
+		$('#npc1').css('left','100px');
+		$('#npc1').css('top','460px'); 
+	}
+
+	else if(phase=='na_street_01'){
+		$('.hero').css('display','block');
+		scene.style.backgroundImage = "url(./img/map/na_street.jpg), url(./img/black_background.jpg)";
+		scene.style.backgroundSize = "auto, cover"; 
+		scene.style.backgroundRepeat = "no-repeat, repeat"; 
+		scene.style.backgroundPosition = "center, center";
+
+		if(true){
+			$('.hero').css('left','100px');
+			$('.hero').css('top','480px');
+			$('.hero').css('background-position-y','0');
+		}
+
+		wallx = [[6,607,941],[873,402,74],[726,502,147],[548,404,178],[406,508,142],[277,412,129],[166,496,111],[6,411,160]];
+		wally = [[947,402,205],[873,402,100],[726,404,98],[548,404,104],[406,412,96],[277,412,84],[166,411,85],[6,411,196]];
+
+		npc=[[470,540,40,'resident_man'],[810,530,40,'resident_woman']];
+		object=[];
+		door=[];
+
+
+		$('#npc1').css('display','block');
+		$('#npc1').css('background-image','url("./img/character/resident_man.png")');
+		$('#npc1').css('left','470px');
+		$('#npc1').css('top','540px'); 
+		$('#npc2').css('display','block');
+		$('#npc2').css('background-image','url("./img/character/resident_woman.png")');
+		$('#npc2').css('left','810px');
+		$('#npc2').css('top','530px'); 
+
+	}
+	else if(phase=='na_street_02'){
+		$('.hero').css('display','block');
+		scene.style.backgroundImage = "url(./img/map/na_street.jpg), url(./img/black_background.jpg)";
+		scene.style.backgroundSize = "auto, cover"; 
+		scene.style.backgroundRepeat = "no-repeat, repeat"; 
+		scene.style.backgroundPosition = "center, center";
+
+		if(true){
+			$('.hero').css('left','20px');
+			$('.hero').css('top','540px');
+			$('.hero').css('background-position-y','0');
+
+		}
+
+		if(newspaper_boy === 0) {
+			person='newspaper_boy'; // 这种没有实体npc的对话要人工设置person，否则没办法进入对话逻辑
+			dialog('newspaper_boy');
+		}
+
+		wallx = [[6,607,941],[873,402,74],[726,502,147],[548,404,178],[406,508,142],[277,412,129],[166,496,111],[6,411,160]];
+		wally = [[947,402,205],[873,402,100],[726,404,98],[548,404,104],[406,412,96],[277,412,84],[166,411,85],[6,411,196]];
+
+		npc=[[60,470,40,'newspaper_boy'],[300,540,40,'vina']];
+		object=[];
+		door=[];
+
+
+		$('#npc1').css('display','block');
+		$('#npc1').css('background-image','url("./img/character/newspaper_boy.png")');
+		$('#npc1').css('left','60px');
+		$('#npc1').css('top','470px'); 
+		$('#npc2').css('display','block');
+		$('#npc2').css('background-image','url("./img/character/vina.png")');
+		$('#npc2').css('left','300px');
+		$('#npc2').css('top','540px'); 
+
+	}
+	else if(phase=='na_street_03'){
+		$('.hero').css('display','block');
+		scene.style.backgroundImage = "url(./img/map/na_street.jpg), url(./img/black_background.jpg)";
+		scene.style.backgroundSize = "auto, cover"; 
+		scene.style.backgroundRepeat = "no-repeat, repeat"; 
+		scene.style.backgroundPosition = "center, center";
+
+		if(true){
+			$('.hero').css('left','20px');
+			$('.hero').css('top','540px');
+			$('.hero').css('background-position-y','0');
+		}
+
+		wallx = [[6,607,941],[873,402,74],[726,502,147],[548,404,178],[406,508,142],[277,412,129],[166,496,111],[6,411,160]];
+		wally = [[947,402,205],[873,402,100],[726,404,98],[548,404,104],[406,412,96],[277,412,84],[166,411,85],[6,411,196]];
+
+		npc=[[100,460, 40, 'our_three'],[50,460, 40, 'our_three'],[150,460, 40, 'our_three']];
+		object=[];
+		door=[];
+
+		
+		$('#npc1').css('display','block');
+		$('#npc1').css('background-image','url("./img/character/old_woman.png")');
+		$('#npc1').css('left','50px');
+		$('#npc1').css('top','460px');
+		$('#npc2').css('display','block');
+		$('#npc2').css('background-image','url("./img/character/young_man.png")');
+		$('#npc2').css('left','100px');
+		$('#npc2').css('top','460px');
+		$('#npc3').css('display','block');
+		$('#npc3').css('background-image','url("./img/character/vina.png")');
+		$('#npc3').css('left','150px');
+		$('#npc3').css('top','460px');
+
+	}
+	else if(phase=='lab'){
+		$('.hero').css('display','block');
+		scene.style.backgroundImage = "url(./img/map/lab.jpg), url(./img/black_background.jpg)";
+		scene.style.backgroundSize = "auto, cover"; // 根据需要调整大小
+		scene.style.backgroundRepeat = "no-repeat, repeat"; // 防止图片重复
+		scene.style.backgroundPosition = "center, center"; // 将图片居中显示
+
+		wallx = [[465,512,22],[352,484,113],[487,484,117],[352,357,252]];
+
+		wally = [[465,484,38],[487,484,38],[604,357,127],[352,357,127]];
+
+		if (true){ 
+			$('.hero').css('left','480px');
+			$('.hero').css('top','500px');
+			$('.hero').css('background-position-y','0'); // 将背景图片居中显示
+		}
+		
+		npc=[[440,370,40,'vina_log'],[490,350,40,'vina_log']]; 
+		object=[[560,360,40,'record']]; 
+		door=[];
+
+		$('#npc1').css('display','block');
+		$('#npc1').css('background-image','url("./img/character/vina.png")');
+		$('#npc1').css('left','440px');
+		$('#npc1').css('top','370px'); 
+		$('#npc2').css('display','none');
+		$('#npc3').css('display','none');
+	
+	}
+	
 
 }
 //这段代码的主要功能是处理地图转换的过渡效果，包括背景图切换、人物移动、NPC出现、对话显示等。

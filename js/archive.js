@@ -26,6 +26,8 @@ function save(archive_num,time_num){
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'old_knight_gem', old_knight_gem);
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'paper_at_home', paper_at_home);
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'gem', gem);
+    localStorage.setItem('Hound_' + usr + '_' + archive_num + 'old_knight_na_street', old_knight_na_street);
+
     
 
 
@@ -55,6 +57,8 @@ function reload(archive_num){
     old_knight_gem = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'old_knight_gem'));
     paper_at_home = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'paper_at_home'));
     gem = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'gem'));
+    old_knight_na_street = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'old_knight_na_street'));
+
 
     hero_x = localStorage.getItem('Hound_' + usr + '_' + archive_num + 'hero_x');
     hero_y = localStorage.getItem('Hound_' + usr + '_' + archive_num + 'hero_y');
