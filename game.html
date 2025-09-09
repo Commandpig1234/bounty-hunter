@@ -5,6 +5,7 @@
 	<meta charset="UTF-8">
 	<title>游戏页</title>
 	<link href="css/hero.css" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" href="./css/highlight.css">
 	<link rel="stylesheet" href="./webfonts/iconfont.css">
 	<link href="css/text.css" type="text/css" rel="stylesheet">
 	<link href="css/reasoning.css" type="text/css" rel="stylesheet">
@@ -13,13 +14,16 @@
 
 	<script language="javascript" src="js/jquery-1.8.3.min.js"></script>
 	<script src="./archive/script.js"></script>
-	<script src="./js/archive.js"></script>
 	<style>
 		*{
 			margin:0;
 		}
 		::-webkit-scrollbar {
   			display: none;
+		}
+		/* 隐藏游戏内音乐播放器但保持音频功能 */
+		.music-container {
+			display: none !important;
 		}
 		/* 主要游戏窗口的设置 */
 		.window{
@@ -140,7 +144,16 @@
 			</div>
 		</div>
 		<!-- <div class="auto-play-music"></div> -->
-		<div id="coordHud"></div>
+		<div id="hud"></div>
+		<div id="small-hint"></div>
+		<!-- 物品高亮提示容器 -->
+		<div class="object-highlights">
+			<div class="object-highlight" id="highlight-1"></div>
+			<div class="object-highlight" id="highlight-2"></div>
+			<div class="object-highlight" id="highlight-3"></div>
+			<div class="object-highlight" id="highlight-4"></div>
+			<div class="object-highlight" id="highlight-5"></div>
+		</div>
 		<!-- 提供“继续游戏”、“保存游戏”和“退出游戏”三个选项。
 		“继续游戏”按钮隐藏当前菜单。
 		“保存游戏”按钮调用 click_save() 函数。
@@ -197,55 +210,163 @@
 						<h2>存档 1</h2>
 						<p id="time1">Empty</p>
 						<p id="scene1" style="font-size: large;">&nbsp;</p>
-						<button onclick="if($('#time1').text()!='Empty'){reload('archive0'); $('.game1 iframe').attr('src', $('.game1 iframe').attr('src')); $('.game2 iframe').attr('src', $('.game2 iframe').attr('src')); $('.game3 iframe').attr('src', $('.game3 iframe').attr('src'));}; $('.loadpage').css('display','none'); $('.text').css('display','none')">Load</button>
+						<button onclick="
+							if($('#time1').text()!='Empty'){
+								safeHUDCall(() => resetHUD());
+								reload('archive0');
+								$('.game1 iframe').attr('src', $('.game1 iframe').attr('src'));
+								$('.game2 iframe').attr('src', $('.game2 iframe').attr('src'));
+								$('.game3 iframe').attr('src', $('.game3 iframe').attr('src'));
+								$('.loadpage').css('display','none');
+								$('.text').css('display','none');
+							} else {
+								alert('该存档为空！');
+							}
+						">Load</button>
 					</div>
 					<div class="save-slot">
 						<h2>存档 2</h2>
 						<p id="time2">Empty</p>
 						<p id="scene2" style="font-size: large;">&nbsp;</p>
-						<button onclick="if($('#time2').text()!='Empty'){reload('archive1'); $('.game1 iframe').attr('src', $('.game1 iframe').attr('src')); $('.game2 iframe').attr('src', $('.game2 iframe').attr('src')); $('.game3 iframe').attr('src', $('.game3 iframe').attr('src'));}; $('.loadpage').css('display','none'); $('.text').css('display','none')">Load</button>
+						<button onclick="
+							if($('#time2').text()!='Empty'){
+								safeHUDCall(() => resetHUD());
+								reload('archive1');
+								$('.game1 iframe').attr('src', $('.game1 iframe').attr('src'));
+								$('.game2 iframe').attr('src', $('.game2 iframe').attr('src'));
+								$('.game3 iframe').attr('src', $('.game3 iframe').attr('src'));
+								$('.loadpage').css('display','none');
+								$('.text').css('display','none');
+							} else {
+								alert('该存档为空！');
+							}
+						">Load</button>
 					</div>
 					<div class="save-slot">
 						<h2>存档 3</h2>
 						<p id="time3">Empty</p>
 						<p id="scene3" style="font-size: large;">&nbsp;</p>
-						<button onclick="if($('#time3').text()!='Empty'){reload('archive2'); $('.game1 iframe').attr('src', $('.game1 iframe').attr('src')); $('.game2 iframe').attr('src', $('.game2 iframe').attr('src')); $('.game3 iframe').attr('src', $('.game3 iframe').attr('src'));}; $('.loadpage').css('display','none'); $('.text').css('display','none')">Load</button>
+						<button onclick="
+							if($('#time3').text()!='Empty'){
+								safeHUDCall(() => resetHUD());
+								reload('archive2');
+								$('.game1 iframe').attr('src', $('.game1 iframe').attr('src'));
+								$('.game2 iframe').attr('src', $('.game2 iframe').attr('src'));
+								$('.game3 iframe').attr('src', $('.game3 iframe').attr('src'));
+								$('.loadpage').css('display','none');
+								$('.text').css('display','none');
+							} else {
+								alert('该存档为空！');
+							}
+						">Load</button>
 					</div>
 					<div class="save-slot">
 						<h2>存档 4</h2>
 						<p id="time4">Empty</p>
 						<p id="scene4" style="font-size: large;">&nbsp;</p>
-						<button onclick="if($('#time4').text()!='Empty'){reload('archive3'); $('.game1 iframe').attr('src', $('.game1 iframe').attr('src')); $('.game2 iframe').attr('src', $('.game2 iframe').attr('src')); $('.game3 iframe').attr('src', $('.game3 iframe').attr('src'));}; $('.loadpage').css('display','none'); $('.text').css('display','none')">Load</button>
+						<button onclick="
+							if($('#time4').text()!='Empty'){
+								safeHUDCall(() => resetHUD());
+								reload('archive3');
+								$('.game1 iframe').attr('src', $('.game1 iframe').attr('src'));
+								$('.game2 iframe').attr('src', $('.game2 iframe').attr('src'));
+								$('.game3 iframe').attr('src', $('.game3 iframe').attr('src'));
+								$('.loadpage').css('display','none');
+								$('.text').css('display','none');
+							} else {
+								alert('该存档为空！');
+							}
+						">Load</button>
 					</div>
 					<div class="save-slot">
 						<h2>存档 5</h2>
 						<p id="time5">Empty</p>
 						<p id="scene5" style="font-size: large;">&nbsp;</p>
-						<button onclick="if($('#time5').text()!='Empty'){reload('archive4'); $('.game1 iframe').attr('src', $('.game1 iframe').attr('src')); $('.game2 iframe').attr('src', $('.game2 iframe').attr('src')); $('.game3 iframe').attr('src', $('.game3 iframe').attr('src'));}; $('.loadpage').css('display','none'); $('.text').css('display','none')">Load</button>
+						<button onclick="
+							if($('#time5').text()!='Empty'){
+								safeHUDCall(() => resetHUD());
+								reload('archive4');
+								$('.game1 iframe').attr('src', $('.game1 iframe').attr('src'));
+								$('.game2 iframe').attr('src', $('.game2 iframe').attr('src'));
+								$('.game3 iframe').attr('src', $('.game3 iframe').attr('src'));
+								$('.loadpage').css('display','none');
+								$('.text').css('display','none');
+							} else {
+								alert('该存档为空！');
+							}
+						">Load</button>
 					</div>
 					<div class="save-slot">
 						<h2>存档 6</h2>
 						<p id="time6">Empty</p>
 						<p id="scene6" style="font-size: large;">&nbsp;</p>
-						<button onclick="if($('#time6').text()!='Empty'){reload('archive5'); $('.game1 iframe').attr('src', $('.game1 iframe').attr('src')); $('.game2 iframe').attr('src', $('.game2 iframe').attr('src')); $('.game3 iframe').attr('src', $('.game3 iframe').attr('src'));}; $('.loadpage').css('display','none'); $('.text').css('display','none')">Load</button>
+						<button onclick="
+							if($('#time6').text()!='Empty'){
+								safeHUDCall(() => resetHUD());
+								reload('archive5');
+								$('.game1 iframe').attr('src', $('.game1 iframe').attr('src'));
+								$('.game2 iframe').attr('src', $('.game2 iframe').attr('src'));
+								$('.game3 iframe').attr('src', $('.game3 iframe').attr('src'));
+								$('.loadpage').css('display','none');
+								$('.text').css('display','none');
+							} else {
+								alert('该存档为空！');
+							}
+						">Load</button>
 					</div>
 					<div class="save-slot">
 						<h2>存档 7</h2>
 						<p id="time7">Empty</p>
 						<p id="scene7" style="font-size: large;">&nbsp;</p>
-						<button onclick="if($('#time7').text()!='Empty'){reload('archive6'); $('.game1 iframe').attr('src', $('.game1 iframe').attr('src')); $('.game2 iframe').attr('src', $('.game2 iframe').attr('src')); $('.game3 iframe').attr('src', $('.game3 iframe').attr('src'));}; $('.loadpage').css('display','none'); $('.text').css('display','none')">Load</button>
+						<button onclick="
+							if($('#time7').text()!='Empty'){
+								safeHUDCall(() => resetHUD());
+								reload('archive6');
+								$('.game1 iframe').attr('src', $('.game1 iframe').attr('src'));
+								$('.game2 iframe').attr('src', $('.game2 iframe').attr('src'));
+								$('.game3 iframe').attr('src', $('.game3 iframe').attr('src'));
+								$('.loadpage').css('display','none');
+								$('.text').css('display','none');
+							} else {
+								alert('该存档为空！');
+							}
+						">Load</button>
 					</div>
 					<div class="save-slot">
 						<h2>存档 8</h2>
 						<p id="time8">Empty</p>
 						<p id="scene8" style="font-size: large;">&nbsp;</p>
-						<button onclick="if($('#time8').text()!='Empty'){reload('archive7'); $('.game1 iframe').attr('src', $('.game1 iframe').attr('src')); $('.game2 iframe').attr('src', $('.game2 iframe').attr('src')); $('.game3 iframe').attr('src', $('.game3 iframe').attr('src'));}; $('.loadpage').css('display','none'); $('.text').css('display','none')">Load</button>
+						<button onclick="
+							if($('#time8').text()!='Empty'){
+								safeHUDCall(() => resetHUD());
+								reload('archive7');
+								$('.game1 iframe').attr('src', $('.game1 iframe').attr('src'));
+								$('.game2 iframe').attr('src', $('.game2 iframe').attr('src'));
+								$('.game3 iframe').attr('src', $('.game3 iframe').attr('src'));
+								$('.loadpage').css('display','none');
+								$('.text').css('display','none');
+							} else {
+								alert('该存档为空！');
+							}
+						">Load</button>
 					</div>
 					<div class="save-slot">
 						<h2>存档 9</h2>
 						<p id="time9">Empty</p>
 						<p id="scene9" style="font-size: large;">&nbsp;</p>
-						<button onclick="if($('#time9').text()!='Empty'){reload('archive8'); $('.game1 iframe').attr('src', $('.game1 iframe').attr('src')); $('.game2 iframe').attr('src', $('.game2 iframe').attr('src')); $('.game3 iframe').attr('src', $('.game3 iframe').attr('src'));} else {alert('该存档为空')}; $('.loadpage').css('display','none')">Load</button>
+						<button onclick="
+							if($('#time9').text()!='Empty'){
+								safeHUDCall(() => resetHUD());
+								reload('archive8');
+								$('.game1 iframe').attr('src', $('.game1 iframe').attr('src'));
+								$('.game2 iframe').attr('src', $('.game2 iframe').attr('src'));
+								$('.game3 iframe').attr('src', $('.game3 iframe').attr('src'));
+								$('.loadpage').css('display','none');
+								$('.text').css('display','none');
+							} else {
+								alert('该存档为空！');
+							}
+						">Load</button>
 					</div>
 				</div>
 				<button onclick="$('.loadpage').css('display','none'),obj='none',$('.container').css('margin-top','0'),$('.container').css('margin-left','0'), window.resetMovement(), front=0, back=0, left=0, right=0, option_now = 0" style="font-size: 2em; padding: 10px 20px;">返回</button>
@@ -287,19 +408,38 @@
 		<!-- 用于显示游戏中的提示信息。 -->
 		<div class="hint"></div>
 
+		<style>
+			#small-hint {
+				position: absolute;
+				bottom: 80px; /* Lowered the position */
+				left: 50%;
+				transform: translateX(-50%);
+				background-color: rgba(40, 20, 10, 0.8); /* Dark, semi-transparent brown */
+				color: #edd9c5; /* Light, parchment-like text color */
+				padding: 8px 15px;
+				border: 2px solid #a88d74; /* Lighter brown border */
+				border-radius: 5px;
+				font-size: 16px;
+				font-weight: bold;
+				box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+				display: none; /* 默认隐藏 */
+				z-index: 1000;
+			}
+		</style>
+
 		<!-- 幕布 (<div class="curtain">)用于显示游戏中的背景和字幕。 -->
 		<div class="curtain">
 			<div class="background_board"></div>
 			<div class="caption"></div>
 		</div>
-		<div class="video">
+		<!-- <div class="video">
 			<video id="bgVideo" src="video/test2.mp4"></video>
 			<button id="skipVideoButton" style="position: absolute; top: 10px; right: 10px; z-index: 1000000; background-color: rgba(0,0,0,0.5); color: white; padding: 10px 20px; cursor: pointer; display: none;">跳过CG</button>
-		</div>
+		</div> -->
 		
 	</div>
 
-	<script>
+	<!-- <script>
 		function showVideo() {
 			document.querySelector('#bgVideo').style.display = 'block';
 			document.querySelector('#skipVideoButton').style.display = 'block';
@@ -315,9 +455,10 @@
 		document.getElementById('skipVideoButton').addEventListener('click', hideVideo);
 
 		document.getElementById('bgVideo').addEventListener('ended', hideVideo);
-	</script>
+	</script> -->
 
 	<script language="javascript" src="js/game_music.js"></script> 
+	<script language="javascript" src="js/hud.js"></script>
 	<script language="javascript" src="js/archive.js"></script>
 	<script language="javascript" src="js/patch.js"></script>
 	<script language="javascript" src="js/init.js"></script>
@@ -329,6 +470,7 @@
 	<script language="javascript" src="js/end.js"></script>
 	<script language="javascript" src="js/startgame.js"></script>
 	<script language="javascript" src="js/object.js"></script>
+
 
 	<style>
 		#myImage {
@@ -366,13 +508,23 @@
 
 			if (event.data === 'win_game1') {
 				old_knight = 7;
+				setTimeout(function(){
+					$('.game1').css('display', 'none');
+				}, 1000);
 			} else if (event.data === 'lose_game1') {
 				old_knight = 8;
+				setTimeout(function(){
+					$('.game1').css('display', 'none');
+				}, 1000);
+			} else if (event.data === 'win_game3') {
+				newspaper_boy = 1;
+			} else if (event.data === 'lose_game3') {
+				newspaper_boy = 4;
 			}
 		});
 	</script>
 	<!-- 游戏内的音乐播放器，与主页不同 -->
-		<script src="./js/hud.js"></script>
+
 	</body>
 
 </html>

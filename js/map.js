@@ -1,6 +1,51 @@
 // 这行代码通过选择器 .window 获取文档中第一个匹配的元素，并将其赋值给变量 scene。
 let scene=document.querySelector('.window');
+var highlightTimer = null; // 用于存储高亮检测定时器
+
+// 计算两个点之间的距离
+function getDistance(x1, y1, x2, y2) {
+    let xDistance = x2 - x1;
+    let yDistance = y2 - y1;
+    return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
+}
+
+// 检查玩家与可交互对象的距离，并控制高亮显示
+function checkObjectProximity() {
+    var hero = $('.hero');
+    var heroX = parseInt(hero.css('left'));
+    var heroY = parseInt(hero.css('top'));
+
+    // 隐藏所有高亮
+    $('.object-highlight').removeClass('show');
+
+    if (typeof object !== 'undefined' && Array.isArray(object)) {
+        for (var i = 0; i < object.length; i++) {
+            if (i < 5) { // 确保我们不会超出预定义的5个高亮元素
+                var objX = object[i][0];
+                var objY = object[i][1];
+                var distance = getDistance(heroX, heroY, objX, objY);
+
+                var highlightEl = $('#highlight-' + (i + 1));
+                if (distance < 150) { // 50px的接近阈值
+                    highlightEl.css({
+                        left: (objX) + 'px', // 调整以使高亮居中
+                        top: (objY) + 'px'
+                    }).addClass('show');
+                } else {
+                    highlightEl.removeClass('show');
+                }
+            }
+        }
+    }
+}
+
 function loadmap(phase){
+	// 清理旧的高亮检测定时器
+	if (highlightTimer) {
+		clearInterval(highlightTimer);
+		highlightTimer = null;
+	}
+
 	// 更新场景状态，从抽象逻辑来讲，这部分应该放在切换地图的函数，但是loadmap用太多了，懒得改了
 	// 这段代码检查当前场景状态 now_phase 是否与传入的 phase 不同，
 	// 或者当前场景状态是 bedroom 且传入的 phase 也是 bedroom。
@@ -14,8 +59,11 @@ function loadmap(phase){
 	// 并初始化 wallx、wally、object 和 npc 数组，这些数组分别定义了墙壁、物体和 NPC 的位置和属性。
 	//下面的逻辑类似
 	if(phase=='home'){
-		
-
+		var audio = document.getElementById('audio');
+		if (audio && (!audio.src.includes('bar') || audio.paused)){
+			loadSong('home and bar.mp3');
+			playSong();
+		}
 		$('.hero').css('display','block'); //显示玩家
 		scene.style.backgroundImage = "url(./img/map/home.jpg), url(./img/black_background.jpg)";
 		scene.style.backgroundSize = "auto, cover"; // 根据需要调整大小
@@ -52,19 +100,25 @@ function loadmap(phase){
 		$('#npc2').css('display','none');
 		$('#npc3').css('display','none');
 		// 物品
-		object=[[619,321,30,'paper_at_home']]; //物品都是底图里有的，就不用css单独显示了
+		object=[[619,321,40,'paper_at_home']]; //物品都是底图里有的，就不用css单独显示了
 		
 		// 传送点
-		door=[[479, 581, 30, 'street_from_home_to_bar']]; 
+		door=[[479, 581, 40, 'street_from_home_to_bar']]; 
 		
 	}
 	
 	else if(phase=='street_from_home_to_bar'){
+		var audio = document.getElementById('audio');
+		if (audio && (!audio.src.includes('bar') || audio.paused)){
+			loadSong('home and bar.mp3');
+			playSong();
+		}
 		$('.hero').css('display','block'); //显示玩家
 		scene.style.backgroundImage = "url(./img/map/street_from_home_to_bar.jpg), url(./img/black_background.jpg)"; // _5_图片缩放好
 		scene.style.backgroundSize = "auto, cover"; // 根据需要调整大小
 		scene.style.backgroundRepeat = "no-repeat, repeat"; // 防止图片重复
 		scene.style.backgroundPosition = "center, center"; // 将图片居中显示
+
 
 		wallx = [[0, 615, 1000], [0, 515, 165], [215, 515, 475], [740, 515, 260], [0, 410, 1000], [0, 440, 400]
 		];
@@ -82,7 +136,7 @@ function loadmap(phase){
 			$('.hero').css('background-position-y','0'); // 将背景图片居中显示
 		}
 		
-		npc = [[425, 525, 40, 'villager_01'], ];
+		npc = [[425, 525, 50, 'villager_01'], ];
 		$('#npc1').css('display','block');
 		$('#npc1').css('background-image','url("./img/character/villager_01.png")');
 		$('#npc1').css('left','425px');
@@ -92,9 +146,15 @@ function loadmap(phase){
 
 		object = [];
 		// door = [[190, 435, 40, 'home'], [715, 405, 40, 'bar']];
-		door = [[190, 435, 40, 'home'], [715, 405, 40, 'bar']]
+		door = [[190, 435, 50, 'home'], [715, 405, 50, 'bar']]
 	}
 	else if(phase=='bar'){
+		var audio = document.getElementById('audio');
+		if (audio && (!audio.src.includes('bar') || audio.paused)){
+			loadSong('home and bar.mp3');
+			playSong();
+		}
+		
 		$('.hero').css('display','block');
 		scene.style.backgroundImage = "url(./img/map/bar.png), url(./img/black_background.jpg)";
 		scene.style.backgroundSize = "auto, cover"; // 根据需要调整大小
@@ -117,7 +177,7 @@ function loadmap(phase){
 			$('.hero').css('background-position-y','0'); // 将背景图片居中显示
 		}
 		
-		npc=[[240,475, 70, 'barman'], [524, 531, 40, 'student_01'], [524, 216, 40, 'old_knight']]; 
+		npc=[[240,475, 70, 'barman'], [524, 531, 50, 'student_01'], [524, 216, 55, 'old_knight']]; 
 		object=[];
 		door=[[404,616,50,'street_from_home_to_bar']]; 
 
@@ -186,7 +246,7 @@ function loadmap(phase){
 		wallx = [[6,607,941],[873,402,74],[726,502,147],[548,404,178],[406,508,142],[277,412,129],[166,496,111],[6,411,160]];
 		wally = [[947,402,205],[873,402,100],[726,404,98],[548,404,104],[406,412,96],[277,412,84],[166,411,85],[6,411,196]];
 
-		npc=[[100,460,40,'old_knight_na_street']];
+		npc=[[100,460,50,'old_knight_na_street']];
 		object=[];
 		door=[];
 
@@ -328,6 +388,7 @@ function loadmap(phase){
 		$('#npc3').css('display','none');
 	
 	}
+	highlightTimer = setInterval(checkObjectProximity, 100);
 	
 
 }

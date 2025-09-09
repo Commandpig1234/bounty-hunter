@@ -54,8 +54,6 @@ function dialog(man){
 			}
 			case 0:{
 				texture.innerHTML='1783年7月17日.';
-				loadSong('home and bar.mp3');
-				playSong();
 				init_dialog_at_home++;
 				break;
 			}
@@ -566,35 +564,48 @@ function dialog(man){
 					text.style.display='none'; // 对话结束后关闭对话框
 					person = 'none';
 					cg(2);
-				}
-				
+				}	
 			}
-			
 		}
 	}
 	else if (man=='newspaper_boy'){
 		text.style.display='block';
 		switch(newspaper_boy){
 			case 0:{
+				picture.innerHTML='';
+				title.innerHTML='';
+				texture.innerHTML='(战斗结束了)';
+				$('.game3').css('display','block');
+				newspaper_boy++; // HACK 很变态的写法，为了退出能直接赢，而如果你玩了游戏，结束后会设置值，这个++就无所谓了
+				break;
+			}
+			case 1:{
 				picture.innerHTML='<img src="./img/avatar/newspaper_boy.png">';
 				title.innerHTML='报童';
 				texture.innerHTML='买一份报纸吗先生';
 				newspaper_boy++;
 				break;
 			}
-			case 1:{
+			case 2:{
 				picture.innerHTML='<img src="./img/avatar/jane.png">';
 				title.innerHTML='杰恩（看到报纸）';
 				texture.innerHTML='1773年......哦，我居然回到了十年前的纳安城！真是神奇！';
 				newspaper_boy++;
 				break;
 			}
-			case 2:{
+			case 3:{
 				picture.innerHTML='<img src="./img/avatar/jane.png">';
 				title.innerHTML='杰恩';
 				texture.innerHTML='难道我要找的人是来自过去的人？那可真是有趣';
 				newspaper_boy++;
 				person='end';
+				break;
+			}
+			case 4:{
+				picture.innerHTML='';
+				title.innerHTML='';
+				texture.innerHTML='';
+				end()
 				break;
 			}
 			default:{
@@ -872,6 +883,24 @@ function dialog(man){
 				break;
 			}
 		}
+	} else if (man=='self'){
+		text.style.display='block';
+		switch(self){
+			case 0:{
+				picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩';
+				texture.innerHTML='这个方向人比较少，还是去那边的酒馆问问吧';
+				person='end';
+				break;
+			}
+			case 1:{
+				picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩';
+				texture.innerHTML='优秀的赏金猎人要对目的地了如指掌，还是去酒馆里问问吧';
+				person='end';
+				break;
+			}
+		}
 	}
 }
 
@@ -926,14 +955,39 @@ function choice(num){
 	}
 }
 
-var tim=setInterval(function(){
+var tim1=setInterval(function(){ // 老骑士的结局
 	if(now_phase=='bar'&&dis(hero.offsetLeft,hero.offsetTop,404,616)<=200&&old_knight>=14&&old_knight<=20){
 		person='old_knight';
+		old_knight=14;
 		dialog(person);
-		clearInterval(tim);
+		clearInterval(tim1);
 	}
 },50);
 
+let guideTriggered2 = false;
+var tim2=setInterval(function(){
+	const inGuideZone = now_phase == 'street_from_home_to_bar' && dis(hero.offsetLeft, hero.offsetTop, 1, 594) <= 100;
 
+	if (inGuideZone && !guideTriggered2 && person === 'none') {
+		guideTriggered2 = true; // Lock
+		person='self';
+		self = 0;
+		dialog(person);
+	} else if (!inGuideZone) {
+		guideTriggered2 = false; // Unlock when player leaves the zone
+	}
+},50);
 
+let guideTriggered3 = false;
+var tim3=setInterval(function(){
+	const inGuideZone = now_phase == 'street_from_home_to_bar' && dis(hero.offsetLeft, hero.offsetTop, 1000, 588) <= 150;
 
+	if (inGuideZone && !guideTriggered3 && person === 'none') {
+		guideTriggered3 = true; // Lock
+		person='self';
+		self = 1;
+		dialog(person);
+	} else if (!inGuideZone) {
+		guideTriggered3 = false; // Unlock when player leaves the zone
+	}
+},50);

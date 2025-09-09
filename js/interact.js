@@ -1,12 +1,30 @@
 // hero, zone, text: 通过选择器获取页面中的元素。
 // timing: 用于存储定时器的ID。
 // pos, front, back, left, right: 用于控制角色移动的方向。
-let hero=document.querySelector('.hero');
+hero=document.querySelector('.hero');
 let zone=document.querySelector('.window');
 let text=document.querySelector('.text');
 let timing=null;
 let pos=0,front=0,back=0,left=0,right=0;
 var page_now=0,skip;
+
+let idleTimer = 0;
+const idleThreshold = 200; // 500 * 50ms = 25秒
+let interactionIdleTimer = 0;
+const interactionIdleThreshold = 40; // 100 * 50ms = 5秒
+
+
+var dialog_button=document.querySelector('.dialog_button');
+dialog_button.addEventListener('click', function(){
+	check_all_interact();
+});
+
+document.addEventListener('keydown', function(event) {
+    if (document.querySelector('.text').style.display !== 'none' && (event.key === ' ' || event.key === 'Enter')) {
+        check_all_interact();
+        event.preventDefault(); // 阻止默认行为，例如空格键滚动页面
+    }
+});
 
 // 创建键盘状态跟踪对象
 const keyState = {
@@ -58,25 +76,118 @@ setInterval(function(){
     left = keyState.a ? 1 : 0;
     right = keyState.d ? 1 : 0;
     
-    // 如果有任何方向键被按下，并且当前没有移动定时器，则启动定时器
-    if ((front || back || left || right) && timing === null) {
-      // 这里的逻辑会在下面的10ms定时器中处理，这里只需要确保标志被正确设置
-      // 避免在这里重复启动定时器，让10ms定时器根据这些标志来决定是否启动
-    } else if (!front && !back && !left && !right && timing !== null) {
-      // 如果所有方向键都释放了，确保重置角色动画和定时器
-      if(hero) {
-        hero.style.backgroundPositionY = pos;
-        hero.style.animationName = "";
-        hero.style.backgroundPositionX = "-48px";
+    // 如果有任何方向键被按下，则重置空闲计时器
+    if (front || back || left || right) {
+      idleTimer = 0;
+      interactionIdleTimer = 0;
+	  hudController.hide();
+      if (timing === null) {
+        // 这里的逻辑会在下面的10ms定时器中处理，这里只需要确保标志被正确设置
+        // 避免在这里重复启动定时器，让10ms定时器根据这些标志来决定是否启动
       }
-      clearInterval(timing);
-      timing = null;
+    } else {
+      // 如果没有移动，增加空闲计时器
+      idleTimer++;
+
+      let promptShown = false;
+
+      // 检查交互提示
+      let inNpcZone = false;
+      let inObjectZone = false;
+      let inDoorZone = false;
+      let hotZoneEntity = null;
+      let entityType = '';
+
+      // 检查NPC
+      for (let i = 0; i < npc.length; i++) {
+        if (hotzone(hero.offsetLeft, hero.offsetTop, npc[i])) {
+          inNpcZone = true;
+          hotZoneEntity = npc[i];
+          entityType = 'npc';
+          break;
+        }
+      }
+      // 检查物品
+      if (!inNpcZone) {
+        for (let i = 0; i < object.length; i++) {
+          if (hotzone(hero.offsetLeft, hero.offsetTop, object[i])) {
+            inObjectZone = true;
+            hotZoneEntity = object[i];
+            entityType = 'object';
+            break;
+          }
+        }
+      }
+      // 检查门
+      if (!inNpcZone && !inObjectZone) {
+        for (let i = 0; i < door.length; i++) {
+          if (hotzone(hero.offsetLeft, hero.offsetTop, door[i])) {
+            inDoorZone = true;
+            hotZoneEntity = door[i];
+            entityType = 'door';
+            break;
+          }
+        }
+      }
+
+      const inAnyHotZone = inNpcZone || inObjectZone || inDoorZone;
+
+      if (inAnyHotZone && !keyState.e) {
+        interactionIdleTimer++;
+        if (interactionIdleTimer >= interactionIdleThreshold) {
+          let message = '';
+          let tipType = 'interaction';
+          const entityName = hotZoneEntity[3];
+          switch (entityType) {
+            case 'npc':
+              message = `按 E 进行对话`;
+              tipType = 'interaction_npc';
+              break;
+            case 'object':
+              message = `按 E 与物品交互`;
+              tipType = 'interaction_object';
+              break;
+            case 'door':
+              message = '按 E 切换场景';
+              tipType = 'interaction_door';
+              break;
+          }
+          hudController.updateHud(message, tipType);
+          promptShown = true;
+        }
+      } else {
+        interactionIdleTimer = 0;
+        if (hudController.currentTipType && hudController.currentTipType.startsWith('interaction')) {
+          hudController.hide();
+        }
+      }
+
+      // 如果没有显示交互提示，则检查移动提示
+      if (!promptShown && idleTimer >= idleThreshold) {
+        hudController.updateHud('尝试使用WASD键或方向键移动', 'movement');
+      }
+
+      if (timing !== null) {
+        // 如果所有方向键都释放了，确保重置角色动画和定时器
+        if(hero) {
+          hero.style.backgroundPositionY = pos;
+          hero.style.animationName = "";
+          hero.style.backgroundPositionX = "-48px";
+        }
+        clearInterval(timing);
+        timing = null;
+      }
     }
+  } else {
+    // 如果处于停止状态，重置空闲计时器并隐藏HUD
+    idleTimer = 0;
+    interactionIdleTimer = 0;
+    hudController.hide();
   }
 }, 50);
 // 该函数用于判断是否需要停止角色的移动，当有交互对象、人物对话、转换场景或处于推理模式时返回 true。
 function stop(){
-	return (person!='none' || obj!='none' || trans!='none');
+	return (person!='none' || obj!='none' || trans!='none' || document.querySelector('.curtain').style.display!='none');
 }// person是end的时候不能移动，再按一下变成none才能移动
 
 // 键盘按下事件处理函数。根据不同的按键代码，更新键盘状态对象
@@ -86,14 +197,30 @@ document.onkeydown=function(event){
 		case 87: // W
 			keyState.w = true;
 			break;
+		case 38: // 向上方向键
+			keyState.w = true;
+			event.preventDefault();
+			break;
 		case 83: // S
 			keyState.s = true;
+			break;
+		case 40: // 向下方向键
+			keyState.s = true;
+			event.preventDefault();
 			break;
 		case 65: // A
 			keyState.a = true;
 			break;
+		case 37: // 向左方向键
+			keyState.a = true;
+			event.preventDefault();
+			break;
 		case 68: // D
 			keyState.d = true;
+			break;
+		case 39: // 向右方向键
+			keyState.d = true;
+			event.preventDefault();
 			break;
 		case 69: // E
 			keyState.e = true;
@@ -104,43 +231,6 @@ document.onkeydown=function(event){
 	if(event.keyCode==69&&!option_now){//对应E
 		check_all_interact();	
 	}
-	// else if (event.keyCode == 70 && !option_now) {//对应f
-	// 	if (map==0) {
-	// 		map = 1;
-	// 		page_now = 0;
-	// 		// $(".board").css('animation-name','');
-	// 		// $(".board").css('margin-left','0');
-	// 		// $(".board").css('display','block');
-	// 		// 显示图片
-	// 		if (now_phase == 'shenyuan') {
-	// 			$("#myImage").attr("src", "./img/lead/shenyuan.png").show().css("z-index", "9999");
-	// 		}
-	// 		else if (now_phase == 'yidianyuan') {
-	// 			$("#myImage").attr("src", "./img/lead/yidianyuan.png").show().css("z-index", "9999");
-	// 		}
-	// 		else if (now_phase == 'dengta') {
-	// 			$("#myImage").attr("src", "./img/lead/dengta.png").show().css("z-index", "9999");
-	// 		}
-	// 		else if (now_phase == 'guangchang') {
-	// 			$("#myImage").attr("src", "./img/lead/guangchang.png").show().css("z-index", "9999");
-	// 		}
-	// 		else if (now_phase == 'neicheng') {
-	// 			$("#myImage").attr("src", "./img/lead/neicheng.png").show().css("z-index", "9999");
-	// 		}
-	// 		else if (now_phase == 'home') {
-	// 			$("#myImage").attr("src", "./img/lead/home.png").show().css("z-index", "9999");
-	// 		}
-	// 		else if (now_phase == 'gaodiyanjiusuo') {
-	// 			$("#myImage").attr("src", "./img/lead/gaodiyanjiusuo.png").show().css("z-index", "9999");
-	// 		}
-	// 	}
-	// 	else {
-	// 		map = 0;
-	// 		// $(".board").css('display','none');
-	// 		// 隐藏图片
-	// 		$("#myImage").hide();
-	// 	}
-	// }
 	
 	else if(event.keyCode==27){//对应esc
 		if(!option_now){
@@ -154,18 +244,9 @@ document.onkeydown=function(event){
 	}
 }
 
-// 定时器处理角色移动每50毫秒检查一次移动方向，并根据方向调整角色的位置。
+// 定时器处理角色移动每10毫秒检查一次移动方向，并根据方向调整角色的位置。
 setInterval(function(){
-	// 更新坐标HUD
-	try{
-		var hud = document.getElementById('coordHud');
-		if(!hero) hero = document.querySelector('.hero');
-		if(hud){
-			var hx = (hero && typeof hero.offsetLeft === 'number') ? hero.offsetLeft : 0;
-			var hy = (hero && typeof hero.offsetTop === 'number') ? hero.offsetTop : 0;
-			hud.innerHTML = 'X: ' + hx + ', Y: ' + hy + ' WASD移动 E键互动 | phase: ' + (now_phase && now_phase.length ? now_phase : '-');
-		}
-	}catch(e){}
+
 	// 如果需要停止移动，重置所有移动标志并清除定时器
 	if(stop()) {
 		front=back=left=right=0;
@@ -289,13 +370,26 @@ document.onkeyup=function(event){
 		case 87: // W
 			keyState.w = false;
 			break;
+		case 38: // 向上方向键
+			keyState.w = false;
+			break;
 		case 83: // S
 			keyState.s = false;
 			break;
+		case 40: // 向下方向键
+			keyState.s = false;
+			break;
+		
 		case 65: // A
 			keyState.a = false;
 			break;
+		case 37: // 向左方向键
+			keyState.a = false;
+			break;
 		case 68: // D
+			keyState.d = false;
+			break;
+		case 39: // 向右方向键
 			keyState.d = false;
 			break;
 		case 69: // E
@@ -348,5 +442,11 @@ function check_all_interact(){
 			if(person!='none') dialog(person);
 			else if(obj!='none') interact(obj);
 			else if(trans!='none') transform(trans);
+			else {
+				smallHintController.show("附近没有可交互对象");
+				setTimeout(() => {
+					smallHintController.hide();
+				}, 2000);
+			}
 		}
 }
