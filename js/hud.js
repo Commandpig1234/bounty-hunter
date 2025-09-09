@@ -73,9 +73,48 @@ class SmallHintController {
   }
 }
 
-// 创建HUD控制器实例
-const hudController = new HudController('hud');
-const smallHintController = new SmallHintController('small-hint');
+// HUD控制器实例（延迟初始化）
+let hudController = null;
+let smallHintController = null;
 
-// 初始化HUD，默认隐藏
-hudController.hide();
+// 初始化HUD控制器
+function initializeHUD() {
+  // 检查DOM是否准备完成
+  if (document.getElementById('hud') && document.getElementById('small-hint')) {
+    if (!hudController) {
+      hudController = new HudController('hud');
+      hudController.hide();
+    }
+    if (!smallHintController) {
+      smallHintController = new SmallHintController('small-hint');
+    }
+    return true;
+  }
+  return false;
+}
+
+// 重置HUD状态
+function resetHUD() {
+  if (hudController) {
+    hudController.ignoreTips = {};
+    hudController.currentTipType = null;
+    hudController.hide();
+  }
+}
+
+// 确保HUD已初始化的安全调用函数
+function safeHUDCall(callback) {
+  if (initializeHUD()) {
+    callback();
+  } else {
+    // 如果DOM还未准备好，延迟执行
+    setTimeout(() => safeHUDCall(callback), 100);
+  }
+}
+
+// DOM准备完成后初始化
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeHUD);
+} else {
+  initializeHUD();
+}

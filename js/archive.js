@@ -34,7 +34,14 @@ function save(archive_num,time_num){
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'our_three', our_three);
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'vina_log', vina_log);
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'record', record);
-    localStorage.setItem('Hound_' + usr + '_' + archive_num + 'ignoreTips', JSON.stringify(hudController.ignoreTips));
+    // 安全保存HUD状态
+    safeHUDCall(() => {
+        if (hudController && hudController.ignoreTips) {
+            localStorage.setItem('Hound_' + usr + '_' + archive_num + 'ignoreTips', JSON.stringify(hudController.ignoreTips));
+        } else {
+            localStorage.setItem('Hound_' + usr + '_' + archive_num + 'ignoreTips', JSON.stringify({}));
+        }
+    });
 
 
     
@@ -75,18 +82,30 @@ function reload(archive_num){
     vina_log = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'vina_log'));
     record = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'record'));
 
+    // 安全恢复HUD状态
     const ignoreTipsJSON = localStorage.getItem('Hound_' + usr + '_' + archive_num + 'ignoreTips');
     if (ignoreTipsJSON) {
-        hudController.ignoreTips = JSON.parse(ignoreTipsJSON);
+        safeHUDCall(() => {
+            if (hudController) {
+                hudController.ignoreTips = JSON.parse(ignoreTipsJSON);
+            }
+        });
+    } else {
+        // 如果没有保存的HUD状态，重置HUD
+        safeHUDCall(() => {
+            resetHUD();
+        });
     }
 
 
 
     hero_x = localStorage.getItem('Hound_' + usr + '_' + archive_num + 'hero_x');
     hero_y = localStorage.getItem('Hound_' + usr + '_' + archive_num + 'hero_y');
-    loadmap(now_phase);
-    hero.style.left = hero_x;
-    hero.style.top = hero_y;
+    transform(now_phase);
+    setTimeout(() => {
+        hero.style.left = hero_x;
+        hero.style.top = hero_y;
+    }, 600);
     person = 'none';
     obj = 'none';
     trans = 'none';
