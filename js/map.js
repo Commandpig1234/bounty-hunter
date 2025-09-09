@@ -1,6 +1,51 @@
 // 这行代码通过选择器 .window 获取文档中第一个匹配的元素，并将其赋值给变量 scene。
 let scene=document.querySelector('.window');
+var highlightTimer = null; // 用于存储高亮检测定时器
+
+// 计算两个点之间的距离
+function getDistance(x1, y1, x2, y2) {
+    let xDistance = x2 - x1;
+    let yDistance = y2 - y1;
+    return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
+}
+
+// 检查玩家与可交互对象的距离，并控制高亮显示
+function checkObjectProximity() {
+    var hero = $('.hero');
+    var heroX = parseInt(hero.css('left'));
+    var heroY = parseInt(hero.css('top'));
+
+    // 隐藏所有高亮
+    $('.object-highlight').removeClass('show');
+
+    if (typeof object !== 'undefined' && Array.isArray(object)) {
+        for (var i = 0; i < object.length; i++) {
+            if (i < 5) { // 确保我们不会超出预定义的5个高亮元素
+                var objX = object[i][0];
+                var objY = object[i][1];
+                var distance = getDistance(heroX, heroY, objX, objY);
+
+                var highlightEl = $('#highlight-' + (i + 1));
+                if (distance < 150) { // 50px的接近阈值
+                    highlightEl.css({
+                        left: (objX) + 'px', // 调整以使高亮居中
+                        top: (objY) + 'px'
+                    }).addClass('show');
+                } else {
+                    highlightEl.removeClass('show');
+                }
+            }
+        }
+    }
+}
+
 function loadmap(phase){
+	// 清理旧的高亮检测定时器
+	if (highlightTimer) {
+		clearInterval(highlightTimer);
+		highlightTimer = null;
+	}
+
 	// 更新场景状态，从抽象逻辑来讲，这部分应该放在切换地图的函数，但是loadmap用太多了，懒得改了
 	// 这段代码检查当前场景状态 now_phase 是否与传入的 phase 不同，
 	// 或者当前场景状态是 bedroom 且传入的 phase 也是 bedroom。
@@ -343,6 +388,7 @@ function loadmap(phase){
 		$('#npc3').css('display','none');
 	
 	}
+	highlightTimer = setInterval(checkObjectProximity, 100);
 	
 
 }
