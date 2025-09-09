@@ -119,11 +119,14 @@
     left: 50%;
     transform: translateX(-50%); /* 水平居中 */
     margin: 10px;
-    padding: 25px;
+    padding: 25px; 
+	/* 宽度可适应文字 */
+	width: fit-content;
     background-color: rgba(70, 40, 20, 0.8);
     color: #e0d0b0;
     font-family: 'MedievalSharp', cursive;
-    font-size: 25px; /* 增大字体大小 */
+    font-size: 20px; /* 增大字体大小 */
+	text-align: center;
     border: 2px solid #a08060;
     border-radius: 8px;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
@@ -135,15 +138,15 @@
 
 .ignore-tip-button {
   position: absolute;
-  bottom: 10px; /* 距离底部10px */
-  right: 10px; /* 距离右侧10px */
+  bottom: 0px; /* 距离底部10px */
+  right: 0px; /* 距离右侧10px */
   background-color: rgba(0, 0, 0, 0.7); /* 半透明黑色背景 */
   color: white;
   border: 1px solid #555;
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 10px;
   display: none; /* 默认隐藏 */
   z-index: 1001; /* 确保按钮在HUD内容之上 */
   

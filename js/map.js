@@ -14,8 +14,11 @@ function loadmap(phase){
 	// 并初始化 wallx、wally、object 和 npc 数组，这些数组分别定义了墙壁、物体和 NPC 的位置和属性。
 	//下面的逻辑类似
 	if(phase=='home'){
-		
-
+		var audio = document.getElementById('audio');
+		if (audio && (!audio.src.includes('bar') || audio.paused)){
+			loadSong('home and bar.mp3');
+			playSong();
+		}
 		$('.hero').css('display','block'); //显示玩家
 		scene.style.backgroundImage = "url(./img/map/home.jpg), url(./img/black_background.jpg)";
 		scene.style.backgroundSize = "auto, cover"; // 根据需要调整大小
@@ -60,6 +63,11 @@ function loadmap(phase){
 	}
 	
 	else if(phase=='street_from_home_to_bar'){
+		var audio = document.getElementById('audio');
+		if (audio && (!audio.src.includes('bar') || audio.paused)){
+			loadSong('home and bar.mp3');
+			playSong();
+		}
 		$('.hero').css('display','block'); //显示玩家
 		scene.style.backgroundImage = "url(./img/map/street_from_home_to_bar.jpg), url(./img/black_background.jpg)"; // _5_图片缩放好
 		scene.style.backgroundSize = "auto, cover"; // 根据需要调整大小
@@ -96,6 +104,12 @@ function loadmap(phase){
 		door = [[190, 435, 50, 'home'], [715, 405, 50, 'bar']]
 	}
 	else if(phase=='bar'){
+		var audio = document.getElementById('audio');
+		if (audio && (!audio.src.includes('bar') || audio.paused)){
+			loadSong('home and bar.mp3');
+			playSong();
+		}
+		
 		$('.hero').css('display','block');
 		scene.style.backgroundImage = "url(./img/map/bar.png), url(./img/black_background.jpg)";
 		scene.style.backgroundSize = "auto, cover"; // 根据需要调整大小

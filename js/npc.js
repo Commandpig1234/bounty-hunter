@@ -54,8 +54,6 @@ function dialog(man){
 			}
 			case 0:{
 				texture.innerHTML='1783年7月17日.';
-				loadSong('home and bar.mp3');
-				playSong();
 				init_dialog_at_home++;
 				break;
 			}
@@ -895,6 +893,13 @@ function dialog(man){
 				person='end';
 				break;
 			}
+			case 1:{
+				picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩';
+				texture.innerHTML='优秀的赏金猎人要对目的地了如指掌，还是去酒馆里问问吧';
+				person='end';
+				break;
+			}
 		}
 	}
 }
@@ -953,21 +958,36 @@ function choice(num){
 var tim1=setInterval(function(){ // 老骑士的结局
 	if(now_phase=='bar'&&dis(hero.offsetLeft,hero.offsetTop,404,616)<=200&&old_knight>=14&&old_knight<=20){
 		person='old_knight';
+		old_knight=14;
 		dialog(person);
 		clearInterval(tim1);
 	}
 },50);
 
-let guideTriggered = false;
+let guideTriggered2 = false;
 var tim2=setInterval(function(){
 	const inGuideZone = now_phase == 'street_from_home_to_bar' && dis(hero.offsetLeft, hero.offsetTop, 1, 594) <= 100;
 
-	if (inGuideZone && !guideTriggered && person === 'none') {
-		guideTriggered = true; // Lock
+	if (inGuideZone && !guideTriggered2 && person === 'none') {
+		guideTriggered2 = true; // Lock
 		person='self';
 		self = 0;
 		dialog(person);
 	} else if (!inGuideZone) {
-		guideTriggered = false; // Unlock when player leaves the zone
+		guideTriggered2 = false; // Unlock when player leaves the zone
+	}
+},50);
+
+let guideTriggered3 = false;
+var tim3=setInterval(function(){
+	const inGuideZone = now_phase == 'street_from_home_to_bar' && dis(hero.offsetLeft, hero.offsetTop, 1000, 588) <= 150;
+
+	if (inGuideZone && !guideTriggered3 && person === 'none') {
+		guideTriggered3 = true; // Lock
+		person='self';
+		self = 1;
+		dialog(person);
+	} else if (!inGuideZone) {
+		guideTriggered3 = false; // Unlock when player leaves the zone
 	}
 },50);
