@@ -566,35 +566,48 @@ function dialog(man){
 					text.style.display='none'; // 对话结束后关闭对话框
 					person = 'none';
 					cg(2);
-				}
-				
+				}	
 			}
-			
 		}
 	}
 	else if (man=='newspaper_boy'){
 		text.style.display='block';
 		switch(newspaper_boy){
 			case 0:{
+				picture.innerHTML='';
+				title.innerHTML='';
+				texture.innerHTML='(战斗结束了)';
+				$('.game3').css('display','block');
+				newspaper_boy++; // HACK 很变态的写法，为了退出能直接赢，而如果你玩了游戏，结束后会设置值，这个++就无所谓了
+				break;
+			}
+			case 1:{
 				picture.innerHTML='<img src="./img/avatar/newspaper_boy.png">';
 				title.innerHTML='报童';
 				texture.innerHTML='买一份报纸吗先生';
 				newspaper_boy++;
 				break;
 			}
-			case 1:{
+			case 2:{
 				picture.innerHTML='<img src="./img/avatar/jane.png">';
 				title.innerHTML='杰恩（看到报纸）';
 				texture.innerHTML='1773年......哦，我居然回到了十年前的纳安城！真是神奇！';
 				newspaper_boy++;
 				break;
 			}
-			case 2:{
+			case 3:{
 				picture.innerHTML='<img src="./img/avatar/jane.png">';
 				title.innerHTML='杰恩';
 				texture.innerHTML='难道我要找的人是来自过去的人？那可真是有趣';
 				newspaper_boy++;
 				person='end';
+				break;
+			}
+			case 4:{
+				picture.innerHTML='';
+				title.innerHTML='';
+				texture.innerHTML='';
+				end()
 				break;
 			}
 			default:{
@@ -933,7 +946,3 @@ var tim=setInterval(function(){
 		clearInterval(tim);
 	}
 },50);
-
-
-
-

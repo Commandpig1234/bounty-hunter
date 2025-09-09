@@ -112,7 +112,7 @@
 }
 
 /* 与音乐播放器风格一致的任务提示HUD */
-#coordHud {
+#hud {
     position: absolute;
     top: 8px;
     left: 8px;

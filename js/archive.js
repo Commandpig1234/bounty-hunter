@@ -27,6 +27,14 @@ function save(archive_num,time_num){
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'paper_at_home', paper_at_home);
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'gem', gem);
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'old_knight_na_street', old_knight_na_street);
+    localStorage.setItem('Hound_' + usr + '_' + archive_num + 'resident_man', resident_man);
+    localStorage.setItem('Hound_' + usr + '_' + archive_num + 'resident_woman', resident_woman);
+    localStorage.setItem('Hound_' + usr + '_' + archive_num + 'newspaper_boy', newspaper_boy);
+    localStorage.setItem('Hound_' + usr + '_' + archive_num + 'vina', vina);
+    localStorage.setItem('Hound_' + usr + '_' + archive_num + 'our_three', our_three);
+    localStorage.setItem('Hound_' + usr + '_' + archive_num + 'vina_log', vina_log);
+    localStorage.setItem('Hound_' + usr + '_' + archive_num + 'record', record);
+
 
     
 
@@ -58,6 +66,14 @@ function reload(archive_num){
     paper_at_home = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'paper_at_home'));
     gem = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'gem'));
     old_knight_na_street = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'old_knight_na_street'));
+    resident_man = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'resident_man'));
+    resident_woman = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'resident_woman'));
+    newspaper_boy = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'newspaper_boy'));
+    vina = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'vina'));
+    our_three = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'our_three'));
+    vina_log = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'vina_log'));
+    record = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'record'));
+
 
 
     hero_x = localStorage.getItem('Hound_' + usr + '_' + archive_num + 'hero_x');

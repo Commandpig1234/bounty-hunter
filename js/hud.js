@@ -3,30 +3,30 @@ class HudController {
   constructor(elementId) {
     this.hudElement = document.getElementById(elementId);
     this.guide = 'WASD移动 E键交互';
-    this.variableText1 = '';
-    this.variableText2 = '';
+    this.scene = '';
+    this.target = '';
   }
 
   // 更新HUD内容
   updateHud() {
-    this.hudElement.textContent = `${this.fixedText} | 当前场景: ${this.variableText1} | 当前目标: ${this.variableText2}`;
+    this.hudElement.textContent = `${this.guide} | 当前场景: ${this.scene} |  ${this.target}`;
   }
 
   // 设置可变文本1
-  setVariableText1(text) {
-    this.variableText1 = text;
+  setScene(text) {
+    this.scene = text;
     this.updateHud();
   }
 
   // 设置可变文本2
-  setVariableText2(text) {
-    this.variableText2 = text;
+  setTarget(text) {
+    this.target = text;
     this.updateHud();
   }
 }
 
 // 创建HUD控制器实例
-const hudController = new HudController('coordHud');
+const hudController = new HudController('hud');
 
 // 初始化HUD
 hudController.updateHud();

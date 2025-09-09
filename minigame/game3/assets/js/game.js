@@ -643,6 +643,11 @@ ctx.drawImage(images.player, player.x, player.y, player.size, player.size);
     ctx.fillStyle = gameState.isWin ? 'green' : 'red';
     
     let message = gameState.isWin ? '恭喜你，通关成功！' : '游戏结束！';
+    if (gameState.isWin) {
+      window.parent.postMessage('win_game3', '*');
+    } else {
+      window.parent.postMessage('lose_game3', '*');
+    }
     ctx.fillText(message, canvas.width / 2, canvas.height / 2);
     
     ctx.font = '24px Arial';

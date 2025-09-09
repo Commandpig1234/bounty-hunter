@@ -104,43 +104,6 @@ document.onkeydown=function(event){
 	if(event.keyCode==69&&!option_now){//对应E
 		check_all_interact();	
 	}
-	// else if (event.keyCode == 70 && !option_now) {//对应f
-	// 	if (map==0) {
-	// 		map = 1;
-	// 		page_now = 0;
-	// 		// $(".board").css('animation-name','');
-	// 		// $(".board").css('margin-left','0');
-	// 		// $(".board").css('display','block');
-	// 		// 显示图片
-	// 		if (now_phase == 'shenyuan') {
-	// 			$("#myImage").attr("src", "./img/lead/shenyuan.png").show().css("z-index", "9999");
-	// 		}
-	// 		else if (now_phase == 'yidianyuan') {
-	// 			$("#myImage").attr("src", "./img/lead/yidianyuan.png").show().css("z-index", "9999");
-	// 		}
-	// 		else if (now_phase == 'dengta') {
-	// 			$("#myImage").attr("src", "./img/lead/dengta.png").show().css("z-index", "9999");
-	// 		}
-	// 		else if (now_phase == 'guangchang') {
-	// 			$("#myImage").attr("src", "./img/lead/guangchang.png").show().css("z-index", "9999");
-	// 		}
-	// 		else if (now_phase == 'neicheng') {
-	// 			$("#myImage").attr("src", "./img/lead/neicheng.png").show().css("z-index", "9999");
-	// 		}
-	// 		else if (now_phase == 'home') {
-	// 			$("#myImage").attr("src", "./img/lead/home.png").show().css("z-index", "9999");
-	// 		}
-	// 		else if (now_phase == 'gaodiyanjiusuo') {
-	// 			$("#myImage").attr("src", "./img/lead/gaodiyanjiusuo.png").show().css("z-index", "9999");
-	// 		}
-	// 	}
-	// 	else {
-	// 		map = 0;
-	// 		// $(".board").css('display','none');
-	// 		// 隐藏图片
-	// 		$("#myImage").hide();
-	// 	}
-	// }
 	
 	else if(event.keyCode==27){//对应esc
 		if(!option_now){
@@ -154,18 +117,9 @@ document.onkeydown=function(event){
 	}
 }
 
-// 定时器处理角色移动每50毫秒检查一次移动方向，并根据方向调整角色的位置。
+// 定时器处理角色移动每10毫秒检查一次移动方向，并根据方向调整角色的位置。
 setInterval(function(){
-	// 更新坐标HUD
-	try{
-		var hud = document.getElementById('coordHud');
-		if(!hero) hero = document.querySelector('.hero');
-		if(hud){
-			var hx = (hero && typeof hero.offsetLeft === 'number') ? hero.offsetLeft : 0;
-			var hy = (hero && typeof hero.offsetTop === 'number') ? hero.offsetTop : 0;
-			hud.innerHTML = 'X: ' + hx + ', Y: ' + hy + ' WASD移动 E键互动 | phase: ' + (now_phase && now_phase.length ? now_phase : '-');
-		}
-	}catch(e){}
+
 	// 如果需要停止移动，重置所有移动标志并清除定时器
 	if(stop()) {
 		front=back=left=right=0;
