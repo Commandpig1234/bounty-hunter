@@ -90,17 +90,18 @@ function cg(id){
 
 		// setTimeout是异步的，不阻塞其他代码执行
 		// 如果想在在显示后4秒消失，应该在setTimeout写上开始时间+4000，而不是4000
-
+		
 		cgTimeouts.push(setTimeout(function(){
 			$('.caption').html('从密室离开后没多久，德莱伯爵就发现宝石不见了，派出卫兵搜捕你们，但是好在韦斯对莱茵城很熟悉，你们成功躲避了追兵，从码头乘船离开莱茵城。'); 
 			$('.caption').fadeIn(1000); // 文字用1秒时间淡入显示
+			loadSong('sea you and me.mp3');
+			playSong();
 		},1000));
 		cgTimeouts.push(setTimeout("$('.caption').fadeOut(500)",5000)); // 4秒后文字用0.5秒淡出
 
 		cgTimeouts.push(setTimeout(function(){
 			$('.caption').html('你与韦斯在海上漂了几天，终于找到了那个神秘的纳安城'); // 设置文字内容为"在这个世界上，他没有家人，没有朋友，没有记忆"
-			loadSong('sea you and me.mp3');
-			playSong();
+			
 			$('.caption').fadeIn(1000); // 文字用1秒时间淡入显示
 		},7000));
 		

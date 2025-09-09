@@ -34,6 +34,7 @@ function save(archive_num,time_num){
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'our_three', our_three);
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'vina_log', vina_log);
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'record', record);
+    localStorage.setItem('Hound_' + usr + '_' + archive_num + 'ignoreTips', JSON.stringify(hudController.ignoreTips));
 
 
     
@@ -54,7 +55,7 @@ function reload(archive_num){
     trans = localStorage.getItem('Hound_' + usr + '_' + archive_num + 'trans');
     last_phase = localStorage.getItem('Hound_' + usr + '_' + archive_num + 'last_phase');
     now_phase = localStorage.getItem('Hound_' + usr + '_' + archive_num + 'now_phase');
-    option_now = 0;
+    
     example = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'example'));
     self = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'self'));
     init_dialog_at_home = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'init_dialog_at_home'));
@@ -74,6 +75,11 @@ function reload(archive_num){
     vina_log = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'vina_log'));
     record = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'record'));
 
+    const ignoreTipsJSON = localStorage.getItem('Hound_' + usr + '_' + archive_num + 'ignoreTips');
+    if (ignoreTipsJSON) {
+        hudController.ignoreTips = JSON.parse(ignoreTipsJSON);
+    }
+
 
 
     hero_x = localStorage.getItem('Hound_' + usr + '_' + archive_num + 'hero_x');
@@ -81,11 +87,22 @@ function reload(archive_num){
     loadmap(now_phase);
     hero.style.left = hero_x;
     hero.style.top = hero_y;
-    var tim=setInterval(function(){
+    person = 'none';
+    obj = 'none';
+    trans = 'none';
+    option_now = 0;
+    var tim1=setInterval(function(){
 	    if(now_phase=='bar'&&dis(hero.offsetLeft,hero.offsetTop,404,616)<=200&&old_knight>=14&&old_knight<=20){
             person='old_knight';
             dialog(person);
-            clearInterval(tim);
+            clearInterval(tim1);
+        }
+    },50);
+    var tim2=setInterval(function(){
+        if(now_phase=='na_street_01'&&dis(hero.offsetLeft,hero.offsetTop,404,616)<=200&&old_knight>=14&&old_knight<=20){
+            person='old_knight';
+            dialog(person);
+            clearInterval(tim2);
         }
     },50);
 }

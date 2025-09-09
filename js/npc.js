@@ -885,6 +885,17 @@ function dialog(man){
 				break;
 			}
 		}
+	} else if (man=='self'){
+		text.style.display='block';
+		switch(self){
+			case 0:{
+				picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩';
+				texture.innerHTML='这个方向人比较少，还是去那边的酒馆问问吧';
+				person='end';
+				break;
+			}
+		}
 	}
 }
 
@@ -939,10 +950,24 @@ function choice(num){
 	}
 }
 
-var tim=setInterval(function(){
+var tim1=setInterval(function(){ // 老骑士的结局
 	if(now_phase=='bar'&&dis(hero.offsetLeft,hero.offsetTop,404,616)<=200&&old_knight>=14&&old_knight<=20){
 		person='old_knight';
 		dialog(person);
-		clearInterval(tim);
+		clearInterval(tim1);
+	}
+},50);
+
+let guideTriggered = false;
+var tim2=setInterval(function(){
+	const inGuideZone = now_phase == 'street_from_home_to_bar' && dis(hero.offsetLeft, hero.offsetTop, 1, 594) <= 100;
+
+	if (inGuideZone && !guideTriggered && person === 'none') {
+		guideTriggered = true; // Lock
+		person='self';
+		self = 0;
+		dialog(person);
+	} else if (!inGuideZone) {
+		guideTriggered = false; // Unlock when player leaves the zone
 	}
 },50);

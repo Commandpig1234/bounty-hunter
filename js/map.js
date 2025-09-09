@@ -17,8 +17,6 @@ function loadmap(phase){
 		
 
 		$('.hero').css('display','block'); //显示玩家
-		hudController.setScene('暂时的家');
-		hudController.setTarget('阅读神秘的书信');
 		scene.style.backgroundImage = "url(./img/map/home.jpg), url(./img/black_background.jpg)";
 		scene.style.backgroundSize = "auto, cover"; // 根据需要调整大小
 		scene.style.backgroundRepeat = "no-repeat, repeat"; // 防止图片重复
@@ -54,21 +52,20 @@ function loadmap(phase){
 		$('#npc2').css('display','none');
 		$('#npc3').css('display','none');
 		// 物品
-		object=[[619,321,30,'paper_at_home']]; //物品都是底图里有的，就不用css单独显示了
+		object=[[619,321,40,'paper_at_home']]; //物品都是底图里有的，就不用css单独显示了
 		
 		// 传送点
-		door=[[479, 581, 30, 'street_from_home_to_bar']]; 
+		door=[[479, 581, 40, 'street_from_home_to_bar']]; 
 		
 	}
 	
 	else if(phase=='street_from_home_to_bar'){
 		$('.hero').css('display','block'); //显示玩家
-		hudController.setScene('街道');
-		hudController.setTarget('打听纳安城的消息');
 		scene.style.backgroundImage = "url(./img/map/street_from_home_to_bar.jpg), url(./img/black_background.jpg)"; // _5_图片缩放好
 		scene.style.backgroundSize = "auto, cover"; // 根据需要调整大小
 		scene.style.backgroundRepeat = "no-repeat, repeat"; // 防止图片重复
 		scene.style.backgroundPosition = "center, center"; // 将图片居中显示
+
 
 		wallx = [[0, 615, 1000], [0, 515, 165], [215, 515, 475], [740, 515, 260], [0, 410, 1000], [0, 440, 400]
 		];
@@ -86,7 +83,7 @@ function loadmap(phase){
 			$('.hero').css('background-position-y','0'); // 将背景图片居中显示
 		}
 		
-		npc = [[425, 525, 40, 'villager_01'], ];
+		npc = [[425, 525, 50, 'villager_01'], ];
 		$('#npc1').css('display','block');
 		$('#npc1').css('background-image','url("./img/character/villager_01.png")');
 		$('#npc1').css('left','425px');
@@ -96,12 +93,10 @@ function loadmap(phase){
 
 		object = [];
 		// door = [[190, 435, 40, 'home'], [715, 405, 40, 'bar']];
-		door = [[190, 435, 40, 'home'], [715, 405, 40, 'bar']]
+		door = [[190, 435, 50, 'home'], [715, 405, 50, 'bar']]
 	}
 	else if(phase=='bar'){
 		$('.hero').css('display','block');
-		hudController.setScene('酒吧');
-		hudController.setTarget('打听纳安城的消息');
 		scene.style.backgroundImage = "url(./img/map/bar.png), url(./img/black_background.jpg)";
 		scene.style.backgroundSize = "auto, cover"; // 根据需要调整大小
 		scene.style.backgroundRepeat = "no-repeat, repeat"; // 防止图片重复
@@ -123,7 +118,7 @@ function loadmap(phase){
 			$('.hero').css('background-position-y','0'); // 将背景图片居中显示
 		}
 		
-		npc=[[240,475, 70, 'barman'], [524, 531, 40, 'student_01'], [524, 216, 40, 'old_knight']]; 
+		npc=[[240,475, 70, 'barman'], [524, 531, 50, 'student_01'], [524, 216, 55, 'old_knight']]; 
 		object=[];
 		door=[[404,616,50,'street_from_home_to_bar']]; 
 
@@ -147,8 +142,6 @@ function loadmap(phase){
 
 	else if(phase=='gem_room'){
 		$('.hero').css('display','block');
-		hudController.setScene('密室');
-		hudController.setTarget('拿走宝石钥匙');
 		scene.style.backgroundImage = "url(./img/map/gem_room.jpg), url(./img/black_background.jpg)";
 		scene.style.backgroundSize = "auto, cover"; // 根据需要调整大小
 		scene.style.backgroundRepeat = "no-repeat, repeat"; // 防止图片重复
@@ -180,8 +173,6 @@ function loadmap(phase){
 
 	else if(phase=='na_street'){
 		$('.hero').css('display','block');
-		hudController.setScene('纳安城街道');
-		hudController.setTarget('继续完成委托，或是？');
 		scene.style.backgroundImage = "url(./img/map/na_street.jpg), url(./img/black_background.jpg)";
 		scene.style.backgroundSize = "auto, cover"; 
 		scene.style.backgroundRepeat = "no-repeat, repeat"; 
@@ -196,7 +187,7 @@ function loadmap(phase){
 		wallx = [[6,607,941],[873,402,74],[726,502,147],[548,404,178],[406,508,142],[277,412,129],[166,496,111],[6,411,160]];
 		wally = [[947,402,205],[873,402,100],[726,404,98],[548,404,104],[406,412,96],[277,412,84],[166,411,85],[6,411,196]];
 
-		npc=[[100,460,40,'old_knight_na_street']];
+		npc=[[100,460,50,'old_knight_na_street']];
 		object=[];
 		door=[];
 
@@ -208,8 +199,6 @@ function loadmap(phase){
 
 	else if(phase=='na_street_01'){
 		$('.hero').css('display','block');
-		hudController.setScene('纳安城街道');
-		hudController.setTarget('打听你要找的人');
 		scene.style.backgroundImage = "url(./img/map/na_street.jpg), url(./img/black_background.jpg)";
 		scene.style.backgroundSize = "auto, cover"; 
 		scene.style.backgroundRepeat = "no-repeat, repeat"; 
@@ -313,8 +302,6 @@ function loadmap(phase){
 	}
 	else if(phase=='lab'){
 		$('.hero').css('display','block');
-		hudController.setScene('实验室');
-		hudController.setTarget('？');
 		scene.style.backgroundImage = "url(./img/map/lab.jpg), url(./img/black_background.jpg)";
 		scene.style.backgroundSize = "auto, cover"; // 根据需要调整大小
 		scene.style.backgroundRepeat = "no-repeat, repeat"; // 防止图片重复
