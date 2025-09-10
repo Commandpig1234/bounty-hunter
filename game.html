@@ -96,7 +96,7 @@
 	<script>
 		setTimeout(function(){
 			$('.manual').fadeOut(500);
-		},4000);
+		},6000);
 		var usr=localStorage.getItem('Hound_'+"CurrentPlayer");
 		var archive_pointer=Number(localStorage.getItem('Hound_'+usr+'_archive_pointer'));
 		function save_hint(text){
@@ -376,8 +376,10 @@
 		<!-- 显示游戏操作指南，包括人物移动、物品交互、NPC对话等操作说明。 -->
 		<div class="manual">
 			<div style="margin-top:150px">
-				<p>W,A,S,D:人物移动</p>
-				<p>E:与NPC对话/进入下一个场景</p>
+				<p>WASD/方向键:人物移动</p>
+				<p>E:交互/进入下一个场景</p>
+				<p>Space/Enter:进行下一句对话</p>
+				<p>请缩放浏览器窗口确保画面完整显示 以获得最佳游戏体验</p>
 			</div>
 		</div>
 		<button id="skipCgButton" style="position: absolute; top: 10px; right: 10px; z-index: 1000000; background-color: rgba(0,0,0,0.5); color: white; padding: 10px 20px; cursor: pointer; display: none;">跳过CG</button>
@@ -389,6 +391,8 @@
 		<div class="npc" id="npc3"></div>
 		<!-- 包含图片和文本容器，用于显示游戏中的对话和提示。 -->
 		<div class="text">
+			<span class="dialog-prompt-space"></span>
+			<span class="dialog-prompt-mouse"></span>
 			<div class="picture"></div>
 			<div class="container">
 				<div class="title"></div>
@@ -411,7 +415,7 @@
 		<style>
 			#small-hint {
 				position: absolute;
-				bottom: 80px; /* Lowered the position */
+				bottom: 200px; /* Lowered the position */
 				left: 50%;
 				transform: translateX(-50%);
 				background-color: rgba(40, 20, 10, 0.8); /* Dark, semi-transparent brown */
@@ -429,8 +433,13 @@
 
 		<!-- 幕布 (<div class="curtain">)用于显示游戏中的背景和字幕。 -->
 		<div class="curtain">
-			<div class="background_board"></div>
-			<div class="caption"></div>
+			<div id="cg-container" style="display: none;">
+				<div class="letterbox top"></div>
+				<div class="background_board"></div>
+				<div class="letterbox bottom">
+					<div class="caption"></div>
+				</div>
+			</div>
 		</div>
 		<!-- <div class="video">
 			<video id="bgVideo" src="video/test2.mp4"></video>

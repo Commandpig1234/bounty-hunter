@@ -65,7 +65,6 @@ function dialog(man){
 			case 2:{
 				texture.innerHTML='但在今天，杰恩接到了一份神秘的委托……';
 				init_dialog_at_home=-1;
-		
 				person='end';
 				break;
 			}
@@ -571,41 +570,27 @@ function dialog(man){
 	else if (man=='newspaper_boy'){
 		text.style.display='block';
 		switch(newspaper_boy){
+
 			case 0:{
-				picture.innerHTML='';
-				title.innerHTML='';
-				texture.innerHTML='(战斗结束了)';
-				$('.game3').css('display','block');
-				newspaper_boy++; // HACK 很变态的写法，为了退出能直接赢，而如果你玩了游戏，结束后会设置值，这个++就无所谓了
-				break;
-			}
-			case 1:{
 				picture.innerHTML='<img src="./img/avatar/newspaper_boy.png">';
 				title.innerHTML='报童';
 				texture.innerHTML='买一份报纸吗先生';
 				newspaper_boy++;
 				break;
 			}
-			case 2:{
+			case 1:{
 				picture.innerHTML='<img src="./img/avatar/jane.png">';
 				title.innerHTML='杰恩（看到报纸）';
 				texture.innerHTML='1773年......哦，我居然回到了十年前的纳安城！真是神奇！';
 				newspaper_boy++;
 				break;
 			}
-			case 3:{
+			case 2:{
 				picture.innerHTML='<img src="./img/avatar/jane.png">';
 				title.innerHTML='杰恩';
 				texture.innerHTML='难道我要找的人是来自过去的人？那可真是有趣';
 				newspaper_boy++;
 				person='end';
-				break;
-			}
-			case 4:{
-				picture.innerHTML='';
-				title.innerHTML='';
-				texture.innerHTML='';
-				end()
 				break;
 			}
 			default:{
@@ -900,6 +885,39 @@ function dialog(man){
 				person='end';
 				break;
 			}
+			case 2:{
+				picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩';
+				texture.innerHTML='还不到离开的时候。再打理一下家里吧。';
+				person='end';
+				break;
+			}
+			case 3:{
+				picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩';
+				texture.innerHTML='既然这么早就出门了，就多问问委托里提到的事吧。';
+				person='end';
+				break;
+			}
+			case 4:{
+				picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩';
+				texture.innerHTML='家里的委托书写着什么来着，回去看看吧。';
+				self++;
+				break;
+			}
+			case 5:{
+				picture.innerHTML='';
+				title.innerHTML='';
+				texture.innerHTML='';
+				self = 4;
+				transform('home');
+				person='none';
+				text.style.display='none'; // 对话结束后关闭对话框
+				$('.choice_zone').css('display','none'); 
+				break;
+			}
+
 		}
 	}
 }
@@ -955,6 +973,7 @@ function choice(num){
 	}
 }
 
+
 var tim1=setInterval(function(){ // 老骑士的结局
 	if(now_phase=='bar'&&dis(hero.offsetLeft,hero.offsetTop,404,616)<=200&&old_knight>=14&&old_knight<=20){
 		person='old_knight';
@@ -965,7 +984,7 @@ var tim1=setInterval(function(){ // 老骑士的结局
 },50);
 
 let guideTriggered2 = false;
-var tim2=setInterval(function(){
+var tim2=setInterval(function(){ // 街道左边提示
 	const inGuideZone = now_phase == 'street_from_home_to_bar' && dis(hero.offsetLeft, hero.offsetTop, 1, 594) <= 100;
 
 	if (inGuideZone && !guideTriggered2 && person === 'none') {
@@ -979,7 +998,7 @@ var tim2=setInterval(function(){
 },50);
 
 let guideTriggered3 = false;
-var tim3=setInterval(function(){
+var tim3=setInterval(function(){ // 街道右边提示
 	const inGuideZone = now_phase == 'street_from_home_to_bar' && dis(hero.offsetLeft, hero.offsetTop, 1000, 588) <= 150;
 
 	if (inGuideZone && !guideTriggered3 && person === 'none') {
@@ -991,3 +1010,19 @@ var tim3=setInterval(function(){
 		guideTriggered3 = false; // Unlock when player leaves the zone
 	}
 },50);
+
+let guideTriggered4 = false;
+var tim4=setInterval(function(){ // 家里提示
+	const inGuideZone = now_phase == 'home' && dis(hero.offsetLeft, hero.offsetTop, 500, 628) <= 110 && (interact_at_home <= 1 || paper_at_home<=3);
+
+	if (inGuideZone && !guideTriggered4 && person === 'none') {
+		guideTriggered4 = true; // Lock
+		person='self';
+		self = 2;
+		dialog(person);
+	} else if (!inGuideZone) {
+		guideTriggered4 = false; // Unlock when player leaves the zone
+	}
+},50);
+
+

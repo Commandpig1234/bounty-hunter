@@ -13,20 +13,66 @@
 	font-size:20px;
 	color:white;
 }
-.background_board{
-	width:1000px;
-	height:800px;
-	display:none;
-	background-color:black;
+#cg-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
 }
-/* cg里的文字显示 */
-.caption{ 
-	position:absolute;
-	z-index:100000;
-	top:50%;
-	left:50%;
-	width:700px;
-	transform:translate(-50%,-50%);
+
+.letterbox {
+    width: 100%;
+    background-color: #000;
+    flex-shrink: 0;
+}
+
+.letterbox.top {
+    height: 15vh;
+}
+
+.letterbox.bottom {
+    height: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.background_board {
+    width: 100%;
+    height: 70vh; /* 100vh - 15vh - 15vh */
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: none;
+}
+
+.caption {
+    font-size: 24px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    padding: 0 20px;
+    text-align: center;
+    display: none;
+}
+
+#skipCgButton {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 201;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: 1px solid white;
+    cursor: pointer;
+    display: none;
 }
 .video video{
 	width:1000px;
