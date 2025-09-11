@@ -74,11 +74,17 @@ function interact(object){
     else if(object=='record'){
         text.style.display='block';
         switch(record){ 
-            default:{
+            case 0:{
                 picture.innerHTML='<img src="./img/avatar/jane.png">';
                 title.innerHTML='杰恩';
 				texture.innerHTML='这里有一个录像带';
-
+                record++;
+                break;
+            }
+            default:{
+                person='none';
+                text.style.display='none';
+                transform('lab2');
             }
         }
     }

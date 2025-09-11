@@ -69,6 +69,7 @@ var our_three=0;
 
 //lab
 var vina_log=0;
+var reveal =0;
 
 // 物品相关
 var paper_at_home=0;

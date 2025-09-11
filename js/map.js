@@ -388,6 +388,47 @@ function loadmap(phase){
 		$('#npc3').css('display','none');
 	
 	}
+
+	else if(phase=='lab2'){
+		scene.style.backgroundImage = "url(./img/map/lab.jpg), url(./img/black_background.jpg)";
+		scene.style.backgroundSize = "auto, cover"; // 根据需要调整大小
+		scene.style.backgroundRepeat = "no-repeat, repeat"; // 防止图片重复
+		scene.style.backgroundPosition = "center, center"; // 将图片居中显示
+
+		if( reveal === 0) {
+			person='reveal'; // 这种没有实体npc的对话要人工设置person，否则没办法进入对话逻辑
+			dialog('reveal');
+		}
+		
+		wallx = [[465,512,22],[352,484,113],[487,484,117],[352,357,252]];
+
+		wally = [[465,484,38],[487,484,38],[604,357,127],[352,357,127]];
+
+
+		if (true){ 
+			$('.hero').css('left','540');
+			$('.hero').css('top','370px');
+			$('.hero').css('background-position-y','0'); // 将背景图片居中显示
+		}
+
+		npc=[];
+		object=[];
+		door=[];
+
+		$('#npc1').css('display','block');
+		$('#npc1').css('background-image','url("./img/character/vina.png")');
+		$('#npc1').css('left','440px');
+		$('#npc1').css('top','370px'); 
+		$('#npc2').css('display','block');
+		$('#npc2').css('background-image','url("./img/character/jane_01.png")');
+		$('#npc2').css('left','370px');
+		$('#npc2').css('top','400px'); 
+		$('#npc3').css('display','block');
+		$('#npc3').css('background-image','url("./img/character/jane_3.png")');
+		$('#npc3').css('left','480px');
+		$('#npc3').css('top','490px');
+		$('#npc3').css('background-position-y','-144px')
+	}
 	highlightTimer = setInterval(checkObjectProximity, 100);
 	
 
