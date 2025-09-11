@@ -32,9 +32,106 @@ function interact(object){
                 picture.innerHTML='<img src="./img/avatar/jane.png">';
                 title.innerHTML='杰恩';
 				texture.innerHTML='报酬足够，没什么困难是英勇无畏的赏金猎人克服不了的。'; //_1_检查一下文字
-                paper_at_home=0;
+                paper_at_home++;
                 obj = 'end';
+                break;
+            case 4:
+                picture.innerHTML='<img src="./img/object/parchment-texture.png">';
+                title.innerHTML='一封信';
+				texture.innerHTML='信：“勇敢的赏金猎人，如果你愿意去到纳安城找到这个人，你将会收到一笔丰厚的报酬”'; 
+                paper_at_home++;
                 break; 
+            case 5:
+                picture.innerHTML='<img src="./img/object/parchment-texture.png">';
+                title.innerHTML='一封信';
+				texture.innerHTML='(把信纸拿了出来，信封里还放着一张地图。地图上在途中的莱茵城标注了钥匙，似乎是想让你去寻找)';  //_4_检查文字
+                paper_at_home=4;
+                obj = 'end';
+                break;
+
+        }
+    } 
+    else if(object=='clock_at_home'){
+        text.style.display='block';
+        switch(clock_at_home){
+            case 0:{
+                picture.innerHTML='';
+				title.innerHTML='钟表';
+				texture.innerHTML='（一个普通的挂钟，指针正一格一格地走着。滴答，滴答...）';
+				clock_at_home++;
+				break;
+            }
+            case 1:{
+                picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩';
+				texture.innerHTML='时间对我来说，似乎没什么意义。无论是过去，还是未来。';
+                interact_at_home++;
+                clock_at_home++;
+                obj='end';
+				break;
+            }
+            default:{
+                picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩';
+				texture.innerHTML='时间对我来说没什么意义。无论是过去，还是未来。';
+                obj='end';
+            }
+        }
+    }
+    else if(object=='cabinet_at_home'){
+        text.style.display='block';
+        switch(cabinet_at_home){
+            case 0:{
+                picture.innerHTML='';
+				title.innerHTML='柜子';
+				texture.innerHTML='（一个结实的木柜，里面放着你所有的家当——一些换洗衣物，保养武器的油膏，还有半瓶劣质的酒。）';
+                cabinet_at_home++;
+				break;
+            }
+            case 1:{
+                picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩';
+				texture.innerHTML='作为赏金猎人，家当越少越好。方便随时上路，也方便随时消失。';
+                interact_at_home++;
+                cabinet_at_home++;
+                obj='end';
+				break;
+            }
+            default:{
+                picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩';
+				texture.innerHTML='作为赏金猎人，家当越少越好。方便随时上路，也方便随时消失。';
+                obj='end';
+            }
+        }
+    }
+    else if(object=='flower_at_home'){
+        text.style.display='block';
+        switch(flower_at_home){
+            case 0:{
+                picture.innerHTML='';
+				title.innerHTML='花盆';
+				texture.innerHTML='（花盆里面是一株早已枯萎的植物，不知被遗忘了多久。）';
+				flower_at_home++;
+                interact_at_home++;
+				break;
+            }
+            case 1:{
+                picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩';
+				texture.innerHTML='（这盆花为什么会有一种莫名的熟悉感？好像...曾经有人很珍视它。）';
+                flower_at_home++;
+                obj='end';
+                break;
+            }
+            default:{
+                picture.innerHTML='';
+				title.innerHTML='花盆';
+				texture.innerHTML='（花盆里面是一株早已枯萎的植物，不知被遗忘了多久。）';
+                flower_at_home++;
+                obj='end';
+                break;
+            }
         }
     }
 
@@ -83,3 +180,4 @@ function interact(object){
         }
     }
 }
+// 为了方便看，定时监测都放npc里，不要放在这

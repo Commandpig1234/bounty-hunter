@@ -9,9 +9,9 @@ let pos=0,front=0,back=0,left=0,right=0;
 var page_now=0,skip;
 
 let idleTimer = 0;
-const idleThreshold = 200; // 500 * 50ms = 25秒
+const idleThreshold = 100; // 500 * 50ms = 25秒
 let interactionIdleTimer = 0;
-const interactionIdleThreshold = 40; // 100 * 50ms = 5秒
+const interactionIdleThreshold = 15; // 15 * 50ms = 0.75秒
 
 
 var dialog_button=document.querySelector('.dialog_button');
@@ -228,6 +228,13 @@ document.onkeydown=function(event){
 	}
 	
 	// E键交互逻辑
+	const isMovingKeyDown = [87, 38, 83, 40, 65, 37, 68, 39].includes(event.keyCode);
+    if (isMovingKeyDown && (person !== 'none' || obj !== 'none')) {
+        smallHintController.show("请先完成当前对话");
+        setTimeout(() => {
+            smallHintController.hide();
+        }, 2000);
+    }
 	if(event.keyCode==69&&!option_now){//对应E
 		check_all_interact();	
 	}
@@ -242,6 +249,7 @@ document.onkeydown=function(event){
 			option_now=0;
 		}
 	}
+	
 }
 
 // 定时器处理角色移动每10毫秒检查一次移动方向，并根据方向调整角色的位置。

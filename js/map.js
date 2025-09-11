@@ -26,10 +26,10 @@ function checkObjectProximity() {
                 var distance = getDistance(heroX, heroY, objX, objY);
 
                 var highlightEl = $('#highlight-' + (i + 1));
-                if (distance < 150) { // 50px的接近阈值
+                if (distance < 50) { // 50px的接近阈值
                     highlightEl.css({
-                        left: (objX) + 'px', // 调整以使高亮居中
-                        top: (objY) + 'px'
+                        left: (objX-20) + 'px', // 调整以使高亮居中
+                        top: (objY-20) + 'px'
                     }).addClass('show');
                 } else {
                     highlightEl.removeClass('show');
@@ -86,8 +86,8 @@ function loadmap(phase){
 		]
 		
 		if (last_phase == 0){ // 很特殊的设定，只有刚开始游戏的时候last_phase是0，出生在床上
-			$('.hero').css('left','609px');
-			$('.hero').css('top','256px');
+			$('.hero').css('left','557px');
+			$('.hero').css('top','264px');
 			$('.hero').css('background-position-y','0'); // 将背景图片居中显示
 		} else if (true){ // 家里只有一个门
 			$('.hero').css('left','479px');
@@ -100,7 +100,7 @@ function loadmap(phase){
 		$('#npc2').css('display','none');
 		$('#npc3').css('display','none');
 		// 物品
-		object=[[619,321,40,'paper_at_home']]; //物品都是底图里有的，就不用css单独显示了
+		object=[[619,321,40,'paper_at_home'], [631, 247, 40, 'clock_at_home'], [478, 272, 40, 'cabinet_at_home'], [333, 493,40, 'flower_at_home']]; //物品都是底图里有的，就不用css单独显示了
 		
 		// 传送点
 		door=[[479, 581, 40, 'street_from_home_to_bar']]; 
@@ -130,6 +130,18 @@ function loadmap(phase){
 			$('.hero').css('left','190px');
 			$('.hero').css('top','495px');
 			$('.hero').css('background-position-y','0'); // 将背景图片居中显示
+			if (interact_at_home <= 1 && paper_at_home > 3){
+				self = 3;
+				person='self'
+				dialog(person);
+				interact_at_home = 3;
+			} else if(paper_at_home <= 3){
+				self = 4;
+				person='self';
+				dialog(person);
+				interact_at_home = 3;
+				paper_at_home = 4;
+			}
 		} else if (last_phase == 'bar'){
 			$('.hero').css('left','715px');
 			$('.hero').css('top','440px');
@@ -253,7 +265,9 @@ function loadmap(phase){
 		$('#npc1').css('display','block');
 		$('#npc1').css('background-image','url("./img/character/old_knight.png")');
 		$('#npc1').css('left','100px');
-		$('#npc1').css('top','460px'); 
+		$('#npc1').css('top','460px');
+		$('#npc2').css('display','none');
+		$('#npc3').css('display','none');
 	}
 
 	else if(phase=='na_street_01'){
@@ -285,6 +299,7 @@ function loadmap(phase){
 		$('#npc2').css('background-image','url("./img/character/resident_woman.png")');
 		$('#npc2').css('left','810px');
 		$('#npc2').css('top','530px'); 
+		$('#npc3').css('display','none');
 
 	}
 	else if(phase=='na_street_02'){
@@ -321,7 +336,8 @@ function loadmap(phase){
 		$('#npc2').css('display','block');
 		$('#npc2').css('background-image','url("./img/character/vina.png")');
 		$('#npc2').css('left','300px');
-		$('#npc2').css('top','540px'); 
+		$('#npc2').css('top','540px');
+		$('#npc3').css('display','none');
 
 	}
 	else if(phase=='na_street_03'){

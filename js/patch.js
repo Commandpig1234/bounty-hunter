@@ -21,10 +21,9 @@ function skipCurrentCg(cgId) {
     clearCgTimeouts();
 
     // 隐藏所有CG相关的元素
-    $('.background_board').css('display','none');
-    $('.caption').css('display','none');
-    $('.curtain').css('display','none');
-    $('#skipCgButton').css('display','none'); // 隐藏跳过按钮
+    $('.curtain').hide();
+    $('#cg-container').hide();
+    $('#skipCgButton').hide(); // 隐藏跳过按钮
 
     // 根据当前CG的ID，直接执行其结束时的逻辑
     if (cgId === 0) {
@@ -53,6 +52,7 @@ function cg(id){
 		$('.background_board').css('display','none'); // 背景板隐藏
 		$('.caption').css('display','none'); // 字幕隐藏
 		$('.curtain').css('display','block'); // 幕布显示
+        $('#cg-container').css('display', 'flex');
 
 		// setTimeout是异步的，不阻塞其他代码执行
 		// 如果想在在显示后4秒消失，应该在setTimeout写上开始时间+4000，而不是4000
@@ -78,6 +78,8 @@ function cg(id){
 		cgTimeouts.push(setTimeout(function(){
 			transform('home');
             $('#skipCgButton').hide(); // CG结束后隐藏按钮
+            $('.curtain').hide();
+            $('#cg-container').hide();
             clearCgTimeouts(); // 清除所有定时器
 		},21000));
 	}
@@ -87,6 +89,7 @@ function cg(id){
 		$('.background_board').css('display','none'); // 背景板隐藏
 		$('.caption').css('display','none'); // 字幕隐藏
 		$('.curtain').css('display','block'); // 幕布显示
+        $('#cg-container').css('display', 'flex');
 
 		// setTimeout是异步的，不阻塞其他代码执行
 		// 如果想在在显示后4秒消失，应该在setTimeout写上开始时间+4000，而不是4000
@@ -116,6 +119,8 @@ function cg(id){
 		cgTimeouts.push(setTimeout(function(){
             transform('na_street');
 			$('#skipCgButton').hide(); // CG结束后隐藏按钮
+            $('.curtain').hide();
+            $('#cg-container').hide();
             clearCgTimeouts(); // 清除所有定时器
 		},19000));
 	}
@@ -126,32 +131,61 @@ function cg(id){
 		$('.background_board').css('display','none'); // 背景板隐藏
 		$('.caption').css('display','none'); // 字幕隐藏
 		$('.curtain').css('display','block'); // 幕布显示
+        $('#cg-container').css('display', 'flex');
 
-		// setTimeout是异步的，不阻塞其他代码执行
-		// 如果想在在显示后4秒消失，应该在setTimeout写上开始时间+4000，而不是4000
-
+		// --- Scene 1 ---
 		cgTimeouts.push(setTimeout(function(){
-			$('.caption').html('你在纳安城打听了很久，但是这里的人都是这样一问三不知，委托似乎就这样卡在这里了，一筹莫展之际，你意外发现纳安城中心的高塔似乎有些奇特'); 
-			$('.caption').fadeIn(1000); // 文字用1秒时间淡入显示
+			$('.background_board').css({
+				'background-image': 'url("./img/cg/1.png")',
+				'background-size': 'cover',
+				'background-position': 'center',
+				'background-repeat': 'no-repeat'
+			}).fadeIn(1000);
+			$('.caption').html('你在纳安城打听了很久，但是这里的人都是这样一问三不知。').fadeIn(1000);
 		},1000));
-		cgTimeouts.push(setTimeout("$('.caption').fadeOut(500)",9000)); // 8秒后文字用0.5秒淡出
+		cgTimeouts.push(setTimeout("$('.caption').fadeOut(500)",6000)); // 1s + 1s fadeIn + 4s duration
+
+		// --- Transition to Scene 2 ---
+		cgTimeouts.push(setTimeout(function() {
+			$('.background_board').fadeOut(1000, function() {
+				$(this).css({
+					'background-image': 'url("./img/cg/2.png")',
+					'background-size': 'cover',
+					'background-position': 'center',
+					'background-repeat': 'no-repeat'
+				}).fadeIn(1000);
+			});
+		}, 6500)); // Start fade out after caption starts fading out
 
 		cgTimeouts.push(setTimeout(function(){
-			$('.caption').html('出于某种直觉，你立刻去了高塔，在这里找到了能够使用宝石钥匙的门'); // 
-			$('.caption').fadeIn(1000); // 文字用1秒时间淡入显示
-		},11000));
-		cgTimeouts.push(setTimeout("$('.caption').fadeOut(500)",15000)); // 4秒后文字用0.5秒淡出
+			$('.caption').html('一筹莫展之际，你发现了一个神秘的高塔，大门上缺口形状与密室中的宝石钥匙不谋而合').fadeIn(1000);
+		}, 8500)); // 6.5s + 1s fadeOut + 1s fadeIn
+		cgTimeouts.push(setTimeout("$('.caption').fadeOut(500)",13500)); // 8.5s + 1s fadeIn + 4s duration
+
+		// --- Transition to Scene 3 ---
+		cgTimeouts.push(setTimeout(function() {
+			$('.background_board').fadeOut(1000, function() {
+				$(this).css({
+					'background-image': 'url("./img/cg/3.png")',
+					'background-size': 'cover',
+					'background-position': 'center',
+					'background-repeat': 'no-repeat'
+				}).fadeIn(1000);
+			});
+		}, 14000)); // Start fade out after caption starts fading out
 
 		cgTimeouts.push(setTimeout(function(){
-			$('.caption').html('当宝石钥匙嵌入门上的孔洞时，门缓缓打开'); // 
-			$('.caption').fadeIn(1000); // 文字用1秒时间淡入显示
-		},17000));
-		cgTimeouts.push(setTimeout("$('.caption').fadeOut(500)",20000)); // 3秒后文字用0.5秒淡出
+			$('.caption').html('当宝石钥匙嵌入高塔大门的孔洞时，门缓缓打开').fadeIn(1000);
+		}, 16000)); // 14s + 1s fadeOut + 1s fadeIn
+		cgTimeouts.push(setTimeout("$('.caption').fadeOut(500)",21000)); // 16s + 1s fadeIn + 4s duration
 		
+		// --- End CG ---
 		cgTimeouts.push(setTimeout(function(){
 			transform('na_street_02');
-			$('#skipCgButton').hide(); // CG结束后隐藏按钮
-            clearCgTimeouts(); // 清除所有定时器
-		},23000));
+			$('#skipCgButton').hide();
+			$('.curtain').hide();
+            $('#cg-container').hide();
+            clearCgTimeouts();
+		}, 22000));
 	}
 }
