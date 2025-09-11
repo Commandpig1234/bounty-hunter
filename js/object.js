@@ -182,6 +182,7 @@ function interact(object){
                 person='none';
                 text.style.display='none';
                 transform('lab2');
+                break;
             }
         }
     }

@@ -15,6 +15,15 @@ function addachievement(id){
 	else if(id==5){
 		$('#achieve').html('守信的赏金猎人');
 	}
+	else if(id==6){
+		$('#achieve').html('铁石心肠');
+	}
+	else if(id==7){
+		$('#achieve').html('落叶归根');
+	}
+	else if(id==8){
+		$('#achieve').html('逍遥四方');
+	}
 	
 	$('.achievement').css('animation-name','achievement');
 	setTimeout("$('.achievement').css('animation-name','counter_achievement')",2000);

@@ -958,7 +958,7 @@ function dialog(man){
 			case 102:{
 				text.style.display='none';
 				person='none';
-				//cg(3);// TO DO
+				cg(3);
 				break;
 			}
 			case 1000:{
@@ -966,24 +966,45 @@ function dialog(man){
 				title.innerHTML='杰恩1';
 				texture.innerHTML='我以为将你找回来会是破局的机会';
 				reveal++;
-				person='end';
 				break;
 			}
 			case 1001:{
 				picture.innerHTML='<img src="./img/avatar/vina_2.png">';
 				title.innerHTML='维娜1';
 				texture.innerHTML='杰恩......我们不是朋友吗……';
+				reveal++;
 				break;
 			}
 			case 1002:{
 				text.style.display='none';
 				person='none';
-				//cg(4);// TO DO
+				cg(4);
 				break;
 			}
 		}
 	}
-
+	else if (man=='finalchoice'){
+		text.style.display='block';
+		switch(finalchoice){
+			case 0:{
+				picture.innerHTML='<img src="./img/avatar/vina.png">';
+				title.innerHTML='维娜';
+				texture.innerHTML='杰恩，你要留在这里，还是回到那个时空';
+				finalchoice++;
+				break;
+			}
+			case 1:{
+				picture.innerHTML='';
+				title.innerHTML='';
+				texture.innerHTML='要选择哪边（你的选择会影响到你的未来）';
+				choice_zone.style.display='block';
+				choice1.innerHTML='留在自己做研究员的时空';
+				choice2.innerHTML='回到自己做赏金猎人的时空';
+				// 这里不应该++，否则不点按钮，e一下就过去了
+				break;
+			}
+		}
+	}
 
 	else if (man=='self'){
 		text.style.display='block';
@@ -1086,6 +1107,8 @@ function choice(num){
 				old_knight_na_street = 10;
 				break;
 			}
+			
+			
 		}
 	}
 	else if(man_now=='reveal'){
@@ -1102,6 +1125,22 @@ function choice(num){
 				title.innerHTML='杰恩3';
 				texture.innerHTML='你做出了一个聪明的决定，我们会合作的很愉快的';
 				reveal = 1000;
+				break;
+			}
+		}
+	}
+	else if(man_now=='finalchoice'){
+		switch(num){
+			case 0:{
+				cg(5);//研究员结局
+				text.style.display='none'; // 对话结束后关闭对话框
+				person = 'none';
+				break;
+			}
+			case 1:{
+				cg(6);//赏金猎人结局
+				text.style.display='none'; // 对话结束后关闭对话框
+				person = 'none';
 				break;
 			}
 		}
