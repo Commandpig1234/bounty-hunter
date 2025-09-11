@@ -35,6 +35,23 @@ function skipCurrentCg(cgId) {
 	else if(cgId === 2){
 		transform('na_street_02');
 	}
+	else if(cgId === 3){
+		transform('lab3');
+	}
+	else if(cgId === 4){
+		addachievement(6)
+		end(5)
+	}
+	
+	else if(cgId === 5){
+		addachievement(7);
+		end(6);
+	}
+	else if(cgId === 6){
+		addachievement(8);
+		end(7);
+	}
+	
 }
 
 function cg(id){
@@ -187,5 +204,142 @@ function cg(id){
             $('#cg-container').hide();
             clearCgTimeouts();
 		}, 22000));
+	}
+	
+	else if(id==3) {//封锁掠夺者CG
+		// 第一阶段：初始化显示状态
+		
+		$('.background_board').css('display','none'); // 背景板隐藏
+		$('.caption').css('display','none'); // 字幕隐藏
+		$('.curtain').css('display','block'); // 幕布显示
+        $('#cg-container').css('display', 'flex');
+
+		// setTimeout是异步的，不阻塞其他代码执行
+		// 如果想在在显示后4秒消失，应该在setTimeout写上开始时间+4000，而不是4000
+		
+		cgTimeouts.push(setTimeout(function(){
+			$('.caption').html('你与来自过去的自己合作，将掠夺者驱逐回他们的时空，并将他们封锁在那个时空，防止他们再去掠夺其他低科技水平时空的资源，这场跨越时空的灾难，落下帷幕'); 
+			$('.caption').fadeIn(1000); // 文字用1秒时间淡入显示
+			loadSong('sea you and me.mp3');
+			playSong();
+		},1000));
+		cgTimeouts.push(setTimeout("$('.caption').fadeOut(500)",9000)); // 8秒后文字用0.5秒淡出
+		cgTimeouts.push(setTimeout(function(){
+			$('.caption').html('尘埃落定后，那些丢失的记忆被归还于每个人，遭受重创的纳安城开始慢慢恢复，经讨论后，时光机项目被暂时终止，在时光机彻底关闭前，来自过去的杰恩回到了过去，现在，轮到你做选择了。'); 
+			$('.caption').fadeIn(1000); // 文字用1秒时间淡入显示
+		},10000));
+		cgTimeouts.push(setTimeout("$('.caption').fadeOut(500)",18000)); // 8秒后文字用0.5秒淡出
+		
+		cgTimeouts.push(setTimeout(function(){
+            transform('lab3');
+			$('#skipCgButton').hide(); // CG结束后隐藏按钮
+            $('.curtain').hide();
+            $('#cg-container').hide();
+            clearCgTimeouts(); // 清除所有定时器
+		},19000));
+	}
+
+	else if(id==4) {//加入掠夺者CG
+		// 第一阶段：初始化显示状态
+		
+		$('.background_board').css('display','none'); // 背景板隐藏
+		$('.caption').css('display','none'); // 字幕隐藏
+		$('.curtain').css('display','block'); // 幕布显示
+        $('#cg-container').css('display', 'flex');
+
+		// setTimeout是异步的，不阻塞其他代码执行
+		// 如果想在在显示后4秒消失，应该在setTimeout写上开始时间+4000，而不是4000
+		
+		cgTimeouts.push(setTimeout(function(){
+			$('.caption').html('你成为了高科技水平时空的一员，在他们的帮助下，你实现了很多自己曾经设想过但是没有机会实现的研究，名誉双收，而低科技水平时空沦为养料，在资源被榨干后分崩离析，从时间的长河里陨落。'); 
+			$('.caption').fadeIn(1000); // 文字用1秒时间淡入显示
+			loadSong('sea you and me.mp3');
+			playSong();
+		},1000));
+		cgTimeouts.push(setTimeout("$('.caption').fadeOut(500)",9000)); // 8秒后文字用0.5秒淡出
+		
+		cgTimeouts.push(setTimeout(function(){
+			$('#skipCgButton').hide(); // CG结束后隐藏按钮
+            $('.curtain').hide();
+            $('#cg-container').hide();
+            clearCgTimeouts(); // 清除所有定时器
+			addachievement(6);
+			end(5)
+		},10000));
+	}
+
+	
+
+	else if(id==5) {//研究员结局CG
+		// 第一阶段：初始化显示状态
+		
+		$('.background_board').css('display','none'); // 背景板隐藏
+		$('.caption').css('display','none'); // 字幕隐藏
+		$('.curtain').css('display','block'); // 幕布显示
+        $('#cg-container').css('display', 'flex');
+
+		// setTimeout是异步的，不阻塞其他代码执行
+		// 如果想在在显示后4秒消失，应该在setTimeout写上开始时间+4000，而不是4000
+		
+		cgTimeouts.push(setTimeout(function(){
+			$('.caption').html('你留在了你的故土，时光机被彻底关闭，你和维娜重新做回了实验室的研究员，和昔日同事们开启了新的研究项目。'); 
+			$('.caption').fadeIn(1000); // 文字用1秒时间淡入显示
+			loadSong('sea you and me.mp3');
+			playSong();
+		},1000));
+		cgTimeouts.push(setTimeout("$('.caption').fadeOut(500)",7000)); // 6秒后文字用0.5秒淡出
+		cgTimeouts.push(setTimeout(function(){
+			$('.caption').html('扭转实验室在纳安城人民心里的形象，把被掠夺者破坏的生态恢复……'); 
+			$('.caption').fadeIn(1000); // 文字用1秒时间淡入显示
+		},8000));
+		cgTimeouts.push(setTimeout("$('.caption').fadeOut(500)",12000)); // 4秒后文字用0.5秒淡出
+		
+		cgTimeouts.push(setTimeout(function(){
+			$('.caption').html('你们的生活充实又有趣，只是偶尔，你也会想到当赏金猎人时认识的那些朋友……'); 
+			$('.caption').fadeIn(1000); // 文字用1秒时间淡入显示
+		},8000));
+		cgTimeouts.push(setTimeout("$('.caption').fadeOut(500)",12000)); // 4秒后文字用0.5秒淡出
+		cgTimeouts.push(setTimeout(function(){
+			addachievement(7);
+			end(6);
+			$('#skipCgButton').hide(); // CG结束后隐藏按钮
+            $('.curtain').hide();
+            $('#cg-container').hide();
+            clearCgTimeouts(); // 清除所有定时器
+		},19000));
+	}
+
+	else if(id==6) {//赏金猎人结局CG
+		// 第一阶段：初始化显示状态
+		
+		$('.background_board').css('display','none'); // 背景板隐藏
+		$('.caption').css('display','none'); // 字幕隐藏
+		$('.curtain').css('display','block'); // 幕布显示
+        $('#cg-container').css('display', 'flex');
+
+		// setTimeout是异步的，不阻塞其他代码执行
+		// 如果想在在显示后4秒消失，应该在setTimeout写上开始时间+4000，而不是4000
+		
+		cgTimeouts.push(setTimeout(function(){
+			$('.caption').html('你与来自过去的自己合作，将掠夺者驱逐回他们的时空，并将他们封锁在那个时空，防止他们再去掠夺其他低科技水平时空的资源，这场跨越时空的灾难，落下帷幕'); 
+			$('.caption').fadeIn(1000); // 文字用1秒时间淡入显示
+			loadSong('sea you and me.mp3');
+			playSong();
+		},1000));
+		cgTimeouts.push(setTimeout("$('.caption').fadeOut(500)",9000)); // 8秒后文字用0.5秒淡出
+		cgTimeouts.push(setTimeout(function(){
+			$('.caption').html('尘埃落定后，那些丢失的记忆被归还于每个人，遭受重创的纳安城开始慢慢恢复，经讨论后，时光机项目被暂时终止，在时光机彻底关闭前，来自过去的杰恩回到了过去，现在，轮到你做选择了。'); 
+			$('.caption').fadeIn(1000); // 文字用1秒时间淡入显示
+		},10000));
+		cgTimeouts.push(setTimeout("$('.caption').fadeOut(500)",18000)); // 8秒后文字用0.5秒淡出
+		
+		cgTimeouts.push(setTimeout(function(){
+            addachievement(8);
+			end(7);
+			$('#skipCgButton').hide(); // CG结束后隐藏按钮
+            $('.curtain').hide();
+            $('#cg-container').hide();
+            clearCgTimeouts(); // 清除所有定时器
+		},19000));
 	}
 }

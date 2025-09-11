@@ -38,6 +38,8 @@ function save(archive_num,time_num){
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'our_three', our_three);
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'vina_log', vina_log);
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'record', record);
+    localStorage.setItem('Hound_' + usr + '_' + archive_num + 'reveal', reveal);
+    localStorage.setItem('Hound_' + usr + '_' + archive_num + 'finalchoice', finalchoice);
     // 安全保存HUD状态
     safeHUDCall(() => {
         if (hudController && hudController.ignoreTips) {
@@ -90,6 +92,8 @@ function reload(archive_num){
     our_three = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'our_three'));
     vina_log = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'vina_log'));
     record = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'record'));
+    reveal = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'reveal'));
+    finalchoice = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'finalchoice'));
 
     // 安全恢复HUD状态
     const ignoreTipsJSON = localStorage.getItem('Hound_' + usr + '_' + archive_num + 'ignoreTips');

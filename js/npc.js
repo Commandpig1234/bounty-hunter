@@ -527,6 +527,7 @@ function dialog(man){
 					text.style.display='none'; // 对话结束后关闭对话框
 					person = 'none';
 					cg(2);
+					break;
 				}
 			}
 			
@@ -868,7 +869,144 @@ function dialog(man){
 				break;
 			}
 		}
-	} else if (man=='self'){
+	}
+	else if (man=='reveal'){
+		text.style.display='block';
+		switch(reveal){
+			case 0:{
+				picture.innerHTML='<img src="./img/avatar/jane.png">';
+				title.innerHTML='杰恩';
+				texture.innerHTML='你就是我要找的委托对象？';
+				reveal++;
+				break;
+			}
+			case 1:{
+				picture.innerHTML='<img src="./img/avatar/jane_01.png">';
+				title.innerHTML='杰恩1';
+				texture.innerHTML='是的，也是我给你下的委托。';
+				reveal++;
+				break;
+			}
+			case 2:{
+				picture.innerHTML='<img src="./img/avatar/jane_01.png">';
+				title.innerHTML='杰恩1';
+				texture.innerHTML='如你所见，他们的科技比我们发达，已经修复了时光机';
+				reveal++;
+				break;
+			}
+			case 3:{
+				picture.innerHTML='<img src="./img/avatar/jane_01.png">';
+				title.innerHTML='杰恩1';
+				texture.innerHTML='这个时空的资源已经快被榨干了，他们这群掠夺者将目光投向了其他科技落后的时空';
+				reveal++;
+				break;
+			}case 4:{
+				picture.innerHTML='<img src="./img/avatar/jane_01.png">';
+				title.innerHTML='杰恩1';
+				texture.innerHTML='而我已经找到了办法，只要你我联手，就能把他们这群掠夺者锁在他们的时空。';
+				reveal++;
+				break;
+			}case 5:{
+				picture.innerHTML='<img src="./img/avatar/jane_3.png">';
+				title.innerHTML='杰恩3';
+				texture.innerHTML='怎么能叫掠夺者呢？';
+				reveal++;
+				break;
+			}case 6:{
+				picture.innerHTML='<img src="./img/avatar/jane_3.png">';
+				title.innerHTML='杰恩3';
+				texture.innerHTML='这是为了文明的发展与留存做出的必要牺牲，';
+				reveal++;
+				break;
+			}
+			case 7:{
+				picture.innerHTML='<img src="./img/avatar/jane_3.png">';
+				title.innerHTML='杰恩3';
+				texture.innerHTML='资源是有限的，总有火种要熄灭，才能让其他火种延续下去。';
+				reveal++;
+				break;
+			}case 8:{
+				picture.innerHTML='<img src="./img/avatar/jane_3.png">';
+				title.innerHTML='杰恩3';
+				texture.innerHTML='杰恩博士，你很聪明，如果愿意加入我们，我们会给你更好的一切。';
+				reveal++;
+				break;
+			}
+			case 9:{
+				picture.innerHTML='';
+				title.innerHTML='';
+				texture.innerHTML='要选择哪边（你的选择会影响到你的未来）';
+				choice_zone.style.display='block';
+				choice1.innerHTML='封锁掠夺者';
+				choice2.innerHTML='加入高科技时空阵营';
+				// 这里不应该++，否则不点按钮，e一下就过去了
+				break;
+			}
+			case 100:{
+				picture.innerHTML='<img src="./img/avatar/jane_3.png">';
+				title.innerHTML='杰恩3';
+				texture.innerHTML='为什么？加入我们，你会得到更好的未来！那些高尖端科技或许是你们一生也无法企及的高度！';
+				reveal++;
+				break;
+			}case 101:{
+				picture.innerHTML='<img src="./img/avatar/vina_2.png">';
+				title.innerHTML='维娜1';
+				texture.innerHTML='再见了，你们这群高傲的侵略者';
+				reveal++;
+				break;
+			}
+			case 102:{
+				text.style.display='none';
+				person='none';
+				cg(3);
+				break;
+			}
+			case 1000:{
+				picture.innerHTML='<img src="./img/avatar/jane_01.png">';
+				title.innerHTML='杰恩1';
+				texture.innerHTML='我以为将你找回来会是破局的机会';
+				reveal++;
+				break;
+			}
+			case 1001:{
+				picture.innerHTML='<img src="./img/avatar/vina_2.png">';
+				title.innerHTML='维娜1';
+				texture.innerHTML='杰恩......我们不是朋友吗……';
+				reveal++;
+				break;
+			}
+			case 1002:{
+				text.style.display='none';
+				person='none';
+				cg(4);
+				break;
+			}
+		}
+	}
+	else if (man=='finalchoice'){
+		text.style.display='block';
+		switch(finalchoice){
+			case 0:{
+				picture.innerHTML='<img src="./img/avatar/vina.png">';
+				title.innerHTML='维娜';
+				texture.innerHTML='杰恩，你要留在这里，还是回到那个时空';
+				finalchoice++;
+				break;
+			}
+			case 1:{
+				picture.innerHTML='';
+				title.innerHTML='';
+				texture.innerHTML='要选择哪边（你的选择会影响到你的未来）';
+				choice_zone.style.display='block';
+				choice1.innerHTML='留在自己做研究员的时空';
+				choice2.innerHTML='回到自己做赏金猎人的时空';
+				// 这里不应该++，否则不点按钮，e一下就过去了
+				break;
+			}
+		}
+	}
+
+	else if (man=='self'){
 		text.style.display='block';
 		switch(self){
 			case 0:{
@@ -967,6 +1105,42 @@ function choice(num){
 				title.innerHTML='杰恩';
 				texture.innerHTML='哦韦斯，谢谢你的好意，不过我已经接了这份委托，还是打算将它做完';
 				old_knight_na_street = 10;
+				break;
+			}
+			
+			
+		}
+	}
+	else if(man_now=='reveal'){
+		switch(num){
+			case 0:{
+				picture.innerHTML='<img src="./img/avatar/jane_01.png">';
+				title.innerHTML='杰恩1';
+				texture.innerHTML='很庆幸过去那么多年你没有改变，我们将会完成一件伟大的事';
+				reveal = 100;
+				break;
+			}
+			case 1:{
+				picture.innerHTML='<img src="./img/avatar/jane_3.png">';
+				title.innerHTML='杰恩3';
+				texture.innerHTML='你做出了一个聪明的决定，我们会合作的很愉快的';
+				reveal = 1000;
+				break;
+			}
+		}
+	}
+	else if(man_now=='finalchoice'){
+		switch(num){
+			case 0:{
+				cg(5);//研究员结局
+				text.style.display='none'; // 对话结束后关闭对话框
+				person = 'none';
+				break;
+			}
+			case 1:{
+				cg(6);//赏金猎人结局
+				text.style.display='none'; // 对话结束后关闭对话框
+				person = 'none';
 				break;
 			}
 		}
