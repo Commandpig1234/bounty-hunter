@@ -34,5 +34,20 @@ function showachieve(){
         $('#achievedetail5').html('答应韦斯悬赏完成后请他喝酒');
         $('#picture5').attr('src','不知道');
     }
+    if('Hound_'+usr+'_achievement6' in localStorage){
+        $('#achievename6').html('铁石心肠');
+        $('#achievedetail6').html('加入高科技时空的侵略者');
+        $('#picture6').attr('src','不知道');
+    }
+    if('Hound_'+usr+'_achievement7' in localStorage){
+        $('#achievename7').html('落叶归根');
+        $('#achievedetail7').html('找回记忆，回到自己原本的时空');
+        $('#picture7').attr('src','不知道');
+    }
+    if('Hound_'+usr+'_achievement8' in localStorage){
+        $('#achievename8').html('逍遥四方');
+        $('#achievedetail8').html('选择继续当赏金猎人');
+        $('#picture8').attr('src','不知道');
+    }
 }
 $(document).ready(showachieve);

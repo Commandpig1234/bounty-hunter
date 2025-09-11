@@ -24,9 +24,9 @@ body {
   position: absolute;
   z-index: 1000;
 }
-.mianlogo { top: -50px; left: 100px; }
+.mianlogo { top: 1.5vw; left: 3vw; }
 .teamlogo { bottom: -150px; right: 10px; }
-.logo img { width: 500px; height: 500px; }
+.logo img { width: 25vw; height: 25vw; }
 
 ::selection {
   background: #B8860B; /* 选中文本时的背景色 */

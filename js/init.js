@@ -81,6 +81,8 @@ var our_three=0;
 //lab
 var vina_log=0;
 var record=0;
+var reveal=0;
+var finalchoice=0;
 
 
 
