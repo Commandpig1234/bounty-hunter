@@ -99,6 +99,10 @@ function loadmap(phase){
 		$('#npc1').css('display','none'); // _8_必须全部隐藏，不然会导致上个场景的npc还在
 		$('#npc2').css('display','none');
 		$('#npc3').css('display','none');
+		$('#npc4').css('display','none');
+		$('#npc5').css('display','none');
+		$('#npc6').css('display','none');
+
 		// 物品
 		object=[[619,321,40,'paper_at_home'], [631, 247, 40, 'clock_at_home'], [478, 272, 40, 'cabinet_at_home'], [333, 493,40, 'flower_at_home']]; //物品都是底图里有的，就不用css单独显示了
 		
@@ -107,7 +111,7 @@ function loadmap(phase){
 		
 	}
 	
-	else if(phase=='street_from_home_to_bar'){
+	else if (phase=='street_from_home_to_bar'){
 		var audio = document.getElementById('audio');
 		if (audio && (!audio.src.includes('bar') || audio.paused)){
 			loadSong('home and bar.mp3');
@@ -134,13 +138,10 @@ function loadmap(phase){
 				self = 3;
 				person='self'
 				dialog(person);
-				interact_at_home = 3;
 			} else if(paper_at_home <= 3){
 				self = 4;
 				person='self';
 				dialog(person);
-				interact_at_home = 3;
-				paper_at_home = 4;
 			}
 		} else if (last_phase == 'bar'){
 			$('.hero').css('left','715px');
@@ -148,13 +149,28 @@ function loadmap(phase){
 			$('.hero').css('background-position-y','0'); // 将背景图片居中显示
 		}
 		
-		npc = [[425, 525, 50, 'villager_01'], ];
+		npc = [[425, 525, 50, 'villager_01'], [527, 605, 50, 'villager_03'],[590, 605, 50, 'villager_02'] ];
 		$('#npc1').css('display','block');
 		$('#npc1').css('background-image','url("./img/character/villager_01.png")');
 		$('#npc1').css('left','425px');
 		$('#npc1').css('top','525px');
-		$('#npc2').css('display','none');
-		$('#npc3').css('display','none');
+		$('#npc1').attr('data-orientation', 'down');
+
+		$('#npc2').css('display','block');
+		$('#npc2').css('background-image','url("./img/character/villager_03.png")');
+		$('#npc2').css('left','527px');
+		$('#npc2').css('top','605px');
+		$('#npc2').attr('data-orientation', 'right');
+
+		$('#npc3').css('display','block');
+		$('#npc3').css('background-image','url("./img/character/villager_02.png")');
+		$('#npc3').css('left','590px');
+		$('#npc3').css('top','605px');
+		$('#npc3').attr('data-orientation', 'left');
+
+		$('#npc4').css('display','none');
+		$('#npc5').css('display','none');
+		$('#npc6').css('display','none');
 
 		object = [];
 		// door = [[190, 435, 40, 'home'], [715, 405, 40, 'bar']];
@@ -189,7 +205,7 @@ function loadmap(phase){
 			$('.hero').css('background-position-y','0'); // 将背景图片居中显示
 		}
 		
-		npc=[[240,475, 70, 'barman'], [524, 531, 50, 'student_01'], [524, 216, 55, 'old_knight']]; 
+		npc=[[240,475, 70, 'barman'], [541, 448, 50, 'student_01'], [691, 221, 55, 'old_knight']]; 
 		object=[];
 		door=[[404,616,50,'street_from_home_to_bar']]; 
 
@@ -197,16 +213,23 @@ function loadmap(phase){
 		$('#npc1').css('background-image','url("./img/character/barman.png")');
 		$('#npc1').css('left','240px');
 		$('#npc1').css('top','475px'); 
+		$('#npc1').attr('data-orientation', 'down');
 
 		$('#npc2').css('display','block');
 		$('#npc2').css('background-image','url("./img/character/student_01.png")');
-		$('#npc2').css('left','524px');
-		$('#npc2').css('top','531px');
+		$('#npc2').css('left','541px');
+		$('#npc2').css('top','448px');
+		$('#npc2').attr('data-orientation', 'down');
 
 		$('#npc3').css('display','block');
 		$('#npc3').css('background-image','url("./img/character/old_knight.png")');
-		$('#npc3').css('left','524px');
-		$('#npc3').css('top','216px');
+		$('#npc3').css('left','691px');
+		$('#npc3').css('top','221px');
+		$('#npc3').attr('data-orientation', 'down');
+
+		$('#npc4').css('display','none');
+		$('#npc5').css('display','none');
+		$('#npc6').css('display','none');
 		
 	
 	}

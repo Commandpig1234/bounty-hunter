@@ -75,25 +75,102 @@ function dialog(man){
 		// man_now='villager_01';
 		switch(villager_01){
 			case 0:{
-				picture.innerHTML='<img src="./img/avatar/jane.png">'; //for me _9_
-				title.innerHTML='杰恩';
-				texture.innerHTML='你好，请问莱茵城是这个方向吗？';
-				villager_01++;
-				break;
-			}
-			case 1:{
 				picture.innerHTML='<img src="./img/avatar/villager_01.png">';
-				title.innerHTML='居民';
-				texture.innerHTML='是的先生，你一直往前走，看到的第一座城就是莱茵城。';
+				title.innerHTML='卫兵';
+				texture.innerHTML='外乡人，看你的样子是长途跋涉而来吧？去街尾的‘雄狮之心’酒馆歇歇脚，那里的麦酒是镇上最好的。';
 				villager_01++;
 				person='end';
 				break;
 			}
 			default:{ //_6_ 游戏的小设计
 				picture.innerHTML='<img src="./img/avatar/villager_01.png">';
-				title.innerHTML='居民';
-				texture.innerHTML='其他我也不清楚了，酒馆里的那些家伙或许会知道';
+				title.innerHTML='卫兵';
+				texture.innerHTML='外乡人，看你的样子是长途跋涉而来吧？去街尾的‘雄狮之心’酒馆歇歇脚，那里的麦酒是镇上最好的。';
 				person='end'; 
+				break;
+			}
+		}
+	}
+	else if (man == 'villager_02'){
+		text.style.display='block';
+		switch(villager_02){
+			case 0:{
+				picture.innerHTML='';
+				title.innerHTML='';
+				texture.innerHTML='（两个年轻人正兴奋地交谈着。）';
+				villager_02++;
+				break;
+			}
+			case 1:{
+				picture.innerHTML='<img src="./img/avatar/villager_02.png">';
+				title.innerHTML='充满幻想的青年';
+				texture.innerHTML='你听说了吗？吟游诗人昨天唱的歌，又是关于纳安城的！';
+				villager_02++;
+				break;
+			}
+			case 2:{
+				picture.innerHTML='<img src="./img/avatar/villager_03.png">';
+				title.innerHTML='憧憬的少女';
+				texture.innerHTML='当然听说了！歌里说，那里是海上升起的天堂，黄金铺地，宝石做窗，每个人脸上都挂着笑容！';
+				villager_02++;
+				break;
+			}
+			case 3:{
+				picture.innerHTML='<img src="./img/avatar/villager_02.png">';
+				title.innerHTML='充满幻想的青年';
+				texture.innerHTML='是啊！据说只要能抵达那里，就再也没有烦恼和忧伤了。要是我能找到去那里的路就好了...';
+				villager_02++;
+				villager_03=4;
+				person='end'
+				break;
+			}
+			default:{
+				picture.innerHTML='<img src="./img/avatar/villager_03.png">';
+				title.innerHTML='憧憬的少女';
+				texture.innerHTML='如果你想打听什么传说故事，最好还是去酒馆。那里的冒险家最多，知道的秘密也最多。';
+				person='end';
+				break;
+			}
+		}
+	}
+	else if (man == 'villager_03'){
+		text.style.display='block';
+		switch(villager_03){
+			case 0:{
+				picture.innerHTML='';
+				title.innerHTML='';
+				texture.innerHTML='（两个年轻人正兴奋地交谈着。）';
+				villager_03++;
+				break;
+			}
+			case 1:{
+				picture.innerHTML='<img src="./img/avatar/villager_02.png">';
+				title.innerHTML='充满幻想的青年';
+				texture.innerHTML='你听说了吗？吟游诗人昨天唱的歌，又是关于纳安城的！';
+				villager_03++;
+				break;
+			}
+			case 2:{
+				picture.innerHTML='<img src="./img/avatar/villager_03.png">';
+				title.innerHTML='憧憬的少女';
+				texture.innerHTML='当然听说了！歌里说，那里是海上升起的天堂，黄金铺地，宝石做窗，每个人脸上都挂着笑容！';
+				villager_03++;
+				break;
+			}
+			case 3:{
+				picture.innerHTML='<img src="./img/avatar/villager_02.png">';
+				title.innerHTML='充满幻想的青年';
+				texture.innerHTML='是啊！据说只要能抵达那里，就再也没有烦恼和忧伤了。要是我能找到去那里的路就好了...';
+				villager_03++;
+				person='end'
+				break;
+			}
+			default:{
+				picture.innerHTML='<img src="./img/avatar/villager_03.png">';
+				title.innerHTML='憧憬的少女';
+				texture.innerHTML='如果你想打听什么传说故事，最好还是去酒馆。那里的冒险家和水手最多，知道的秘密也最多。';
+				villager_02=4;
+				person='end';
 				break;
 			}
 		}
@@ -896,6 +973,7 @@ function dialog(man){
 				picture.innerHTML='<img src="./img/avatar/jane.png">';
 				title.innerHTML='杰恩';
 				texture.innerHTML='既然这么早就出门了，就多问问委托里提到的事吧。';
+				interact_at_home = 3;
 				person='end';
 				break;
 			}
@@ -903,6 +981,8 @@ function dialog(man){
 				picture.innerHTML='<img src="./img/avatar/jane.png">';
 				title.innerHTML='杰恩';
 				texture.innerHTML='家里的委托书写着什么来着，回去看看吧。';
+				interact_at_home = 3;
+				paper_at_home=4;
 				self++;
 				break;
 			}

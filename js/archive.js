@@ -24,6 +24,11 @@ function save(archive_num,time_num){
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'flower_at_home', flower_at_home);
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'interact_at_home', interact_at_home);
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'villager_01', villager_01);
+    localStorage.setItem('Hound_' + usr + '_' + archive_num + 'villager_02', villager_02);
+    localStorage.setItem('Hound_' + usr + '_' + archive_num + 'villager_03', villager_03);
+    localStorage.setItem('Hound_' + usr + '_' + archive_num + 'init_dialog_at_bar', init_dialog_at_bar);
+    localStorage.setItem('Hound_' + usr + '_' + archive_num + 'mercenary_01', mercenary_01);
+    localStorage.setItem('Hound_' + usr + '_' + archive_num + 'mercenary_02', mercenary_02);
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'barman', barman);
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'student_01', student_01);
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'old_knight', old_knight);
@@ -76,6 +81,11 @@ function reload(archive_num){
     flower_at_home = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'flower_at_home'));
     interact_at_home = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'interact_at_home'));
     villager_01 = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'villager_01'));
+    villager_02 = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'villager_02'));
+    villager_03 = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'villager_03'));
+    init_dialog_at_bar = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'init_dialog_at_bar'));
+    mercenary_01 = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'mercenary_01'));
+    mercenary_02 = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'mercenary_02'));
     barman = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'barman'));
     student_01 = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'student_01'));
     old_knight = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'old_knight'));

@@ -50,11 +50,16 @@ var interact_at_home=0; // 有意思的小设计
 
 // street_from_home_to_bar
 var villager_01=0;
+var villager_02=0;
+var villager_03=0;
 
 // bar
+var init_dialog_at_bar=0;
 var barman=0;
 var student_01=0;
 var old_knight=0;
+var mercenary_01=0;
+var mercenary_02=0;
 
 // gem_room
 var old_knight_gem=0;

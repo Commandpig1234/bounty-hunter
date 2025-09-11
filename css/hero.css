@@ -18,6 +18,12 @@
 	animation-timing-function: steps(2);
 	animation-iteration-count: infinite;
 }
+
+/* 根据data-orientation属性设置NPC的初始朝向 */
+.npc[data-orientation="down"] { background-position-y: 0; }
+.npc[data-orientation="left"] { background-position-y: -48px; }
+.npc[data-orientation="right"] { background-position-y: -96px; }
+.npc[data-orientation="up"] { background-position-y: -144px; }
 @keyframes backward{
 	0%{
 		background-position:0 0;
