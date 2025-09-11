@@ -16,9 +16,13 @@ function save(archive_num,time_num){
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'trans', trans);
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'last_phase', last_phase);
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'now_phase', now_phase);
-    localStorage.setItem('Hound_' + usr + '_' + archive_num + 'example', example);
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'self', self);
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'init_dialog_at_home', init_dialog_at_home);
+    localStorage.setItem('Hound_' + usr + '_' + archive_num + 'paper_at_home', paper_at_home);
+    localStorage.setItem('Hound_' + usr + '_' + archive_num + 'clock_at_home', clock_at_home);
+    localStorage.setItem('Hound_' + usr + '_' + archive_num + 'cabinet_at_home', cabinet_at_home);
+    localStorage.setItem('Hound_' + usr + '_' + archive_num + 'flower_at_home', flower_at_home);
+    localStorage.setItem('Hound_' + usr + '_' + archive_num + 'interact_at_home', interact_at_home);
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'villager_01', villager_01);
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'barman', barman);
     localStorage.setItem('Hound_' + usr + '_' + archive_num + 'student_01', student_01);
@@ -67,6 +71,11 @@ function reload(archive_num){
     example = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'example'));
     self = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'self'));
     init_dialog_at_home = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'init_dialog_at_home'));
+    paper_at_home = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'paper_at_home'));
+    clock_at_home = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'clock_at_home'));
+    cabinet_at_home = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'cabinet_at_home'));
+    flower_at_home = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'flower_at_home'));
+    interact_at_home = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'interact_at_home'));
     villager_01 = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'villager_01'));
     barman = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'barman'));
     student_01 = Number(localStorage.getItem('Hound_' + usr + '_' + archive_num + 'student_01'));
@@ -119,12 +128,6 @@ function reload(archive_num){
             clearInterval(tim1);
         }
     },50);
-    var tim2=setInterval(function(){
-        if(now_phase=='na_street_01'&&dis(hero.offsetLeft,hero.offsetTop,404,616)<=200&&old_knight>=14&&old_knight<=20){
-            person='old_knight';
-            dialog(person);
-            clearInterval(tim2);
-        }
-    },50);
+    
 }
 

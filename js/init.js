@@ -38,9 +38,15 @@ function dis(x,y,x1,y1){
 }
 
 // npc对话和旁白对话，旁白全部分别用变量，避免莫名bug
-var example = 0; // 家里的示例npc
-var self = 0; // 自言自语
+var self = 0; // 自言自语，用于提示玩家
+
+// home
 var init_dialog_at_home=0; // 出生点初始对话
+var paper_at_home=0;
+var clock_at_home=0;
+var cabinet_at_home=0;
+var flower_at_home=0;
+var interact_at_home=0; // 有意思的小设计
 
 // street_from_home_to_bar
 var villager_01=0;
@@ -52,7 +58,7 @@ var old_knight=0;
 
 // gem_room
 var old_knight_gem=0;
-
+var gem=0;
 //na_street
 var old_knight_na_street=0;
 
@@ -70,8 +76,7 @@ var our_three=0;
 //lab
 var vina_log=0;
 var reveal =0;
-
-// 物品相关
-var paper_at_home=0;
-var gem=0;
 var record=0;
+
+
+
